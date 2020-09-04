@@ -1,0 +1,45 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+分析模块所需配置
+"""
+GIT = 10
+LOCAL = 20
+
+ANALYSIS_MODULE_TYPE = {
+    GIT: 'github',
+    LOCAL: '本地上传',
+}
+
+MODULE_UN_DONE = 10
+MODULE_DOING = 20
+MODULE_ERROR = 30
+MODULE_ACTIVE = 40
+MODULE_UN_ACTIVE = 50
+# 分析模块状态
+ANALYSIS_MODULE_STATUS = {
+    MODULE_UN_DONE: '未解压/下载',
+    MODULE_DOING: '解压/下载中',
+    MODULE_ERROR: '解压/下载错误',
+    MODULE_ACTIVE: '可用',
+    MODULE_UN_ACTIVE: '不可用',
+}
+
+ANALYSIS_PENDING = 0
+ANALYSIS_UN_START = 10
+ANALYSIS_RUNNING = 20
+ANALYSIS_STOP = 30
+ANALYSIS_ERROR = 40
+ANALYSIS_SUCCESS = 50
+ANALYSIS_RESET = 60
+
+# 分析状态
+ANALYSIS_STATUS = {
+    ANALYSIS_PENDING: '等待中',
+    ANALYSIS_UN_START: '未启动',
+    ANALYSIS_RUNNING: '进行中',
+    ANALYSIS_STOP: '已停止',
+    ANALYSIS_ERROR: '错误结束',
+    ANALYSIS_SUCCESS: '成功结束',
+    ANALYSIS_RESET: '已重置',
+}

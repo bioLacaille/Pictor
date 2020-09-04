@@ -1,0 +1,38 @@
+.dk-pull-right {
+  float: right;
+}
+
+.dk-pull-left {
+  float: left;
+}
+
+.dk-btn-block {
+  display: block;
+  width: 100%;
+}
+
+// 边距
+@for $i from 0 through 6 {
+  .dk-m-#{$i} { margin: $spacer * $i !important; }
+  .dk-mt-#{$i} { margin-top: $spacer * $i !important; }
+  .dk-mr-#{$i} { margin-right: $spacer * $i !important; }
+  .dk-mb-#{$i} { margin-bottom: $spacer * $i !important; }
+  .dk-ml-#{$i} { margin-left: $spacer * $i !important; }
+  .dk-p-#{$i} { padding: $spacer * $i !important; }
+  .dk-pt-#{$i} { padding-top: $spacer * $i !important; }
+  .dk-pr-#{$i} { padding-right: $spacer * $i !important; }
+  .dk-pb-#{$i} { padding-bottom: $spacer * $i !important; }
+  .dk-pl-#{$i} { padding-left: $spacer * $i !important; }
+}
+
+// 文字颜色
+.dk-text-primary{color: $--color-primary !important; }
+.dk-text-success{color: $--color-success !important; }
+.dk-text-warning{color: $--color-warning !important; }
+.dk-text-danger{color: $--color-danger !important; }
+.dk-text-info{color: $--color-info !important; }
+
+/// 文字方向
+.dk-text-left{text-align: left !important;}
+.dk-text-center{text-align: center !important;}
+.dk-text-right{text-align: right !important;}
