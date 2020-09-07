@@ -5,6 +5,7 @@ import shutil
 import os
 import git
 from pictor.configures import GIT, LOCAL, MODULE_ACTIVE, MODULE_ERROR
+from pictor.utils.tar_helpers import un_rar_file, un_zip_file, un_tar_file
 
 
 @shared_task(name="analysis_module_install_task")
@@ -24,7 +25,20 @@ def analysis_module_install_task(module_id):
             file_path = module.file_path
             file_name, file_extension = os.path.splitext(os.path.basename(module.pipeline_file.path))
             if 'tar' in file_extension:
-                pass
+                task_logger.debug(f'安装本地 tar 模块: {module.name}, {module.version}, {file_path}')
+                un_tar_file(module.pipeline_file.path, file_path)
+                module.status = MODULE_ACTIVE
+                module.save()
+            elif 'zip' in file_extension:
+                task_logger.debug(f'安装本地 zip 模块: {module.name}, {module.version}, {file_path}')
+                un_zip_file(module.pipeline_file.path, file_path)
+                module.status = MODULE_ACTIVE
+                module.save()
+            elif 'rar' in file_extension:
+                task_logger.debug(f'安装本地 rar 模块: {module.name}, {module.version}, {file_path}')
+                un_rar_file(module.pipeline_file.path, file_path)
+                module.status = MODULE_ACTIVE
+                module.save()
     except Exception as error:
         module.status = MODULE_ERROR
         module.save()

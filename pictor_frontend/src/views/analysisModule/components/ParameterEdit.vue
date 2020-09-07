@@ -10,7 +10,7 @@
       <p style="margin-top: 1.3%;">$ > {{ full_command }}</p>
     </div>
     <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-      <el-form-item label="模块名称" prop="name">
+      <el-form-item label="参数名称" prop="name">
         <el-input v-model.trim="form.name"></el-input>
       </el-form-item>
       <el-form-item label="描述/备注" prop="remark">
@@ -282,6 +282,7 @@ export default {
           }
           const { messages, results } = data;
           this.$baseMessage(messages, "success");
+          this.$emit("fetchParameterData");
           this.close();
         } else {
           return false;

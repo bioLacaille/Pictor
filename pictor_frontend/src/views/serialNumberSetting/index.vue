@@ -61,7 +61,7 @@
             show-overflow-tooltip
             label="规则名称"
             prop="name"
-            width="200"
+            min-width="200"
             sortable="custom"
           >
           </el-table-column>
@@ -194,7 +194,7 @@
             show-overflow-tooltip
             label="规则名称"
             prop="name"
-            width="200"
+            min-width="200"
             sortable="custom"
           >
           </el-table-column>
@@ -327,7 +327,7 @@
             show-overflow-tooltip
             label="规则名称"
             prop="name"
-            width="200"
+            min-width="200"
             sortable="custom"
           >
           </el-table-column>
@@ -400,139 +400,6 @@
           @fetchData="fetchAnalysisData"
         ></analysis-num-edit>
       </el-tab-pane>
-      <!--      <el-tab-pane key="sequencing" label="拆分任务编号规则" name="sequencing">-->
-      <!--        <vab-query-form>-->
-      <!--          <vab-query-form-left-panel>-->
-      <!--            <el-button-->
-      <!--              icon="el-icon-plus"-->
-      <!--              type="primary"-->
-      <!--              @click="handleSequencingAdd"-->
-      <!--              >添加-->
-      <!--            </el-button>-->
-      <!--          </vab-query-form-left-panel>-->
-      <!--          <vab-query-form-right-panel>-->
-      <!--            <el-form-->
-      <!--              ref="form"-->
-      <!--              :model="sequencing_query_form"-->
-      <!--              :inline="true"-->
-      <!--              @submit.native.prevent-->
-      <!--            >-->
-      <!--              <el-form-item>-->
-      <!--                <el-input-->
-      <!--                  v-model="sequencing_query_form.search"-->
-      <!--                  placeholder="规则名称"-->
-      <!--                />-->
-      <!--              </el-form-item>-->
-      <!--              <el-form-item>-->
-      <!--                <el-button-->
-      <!--                  icon="el-icon-search"-->
-      <!--                  type="primary"-->
-      <!--                  native-type="submit"-->
-      <!--                  @click="handleSequencingQuery"-->
-      <!--                  >查询-->
-      <!--                </el-button>-->
-      <!--              </el-form-item>-->
-      <!--            </el-form>-->
-      <!--          </vab-query-form-right-panel>-->
-      <!--        </vab-query-form>-->
-
-      <!--        <el-table-->
-      <!--          ref="sequencingNumTable"-->
-      <!--          v-loading="listLoading"-->
-      <!--          :data="sequencingList"-->
-      <!--          :element-loading-text="elementLoadingText"-->
-      <!--          @sort-change="sequencingTableSortChange"-->
-      <!--        >-->
-      <!--          <el-table-column-->
-      <!--            show-overflow-tooltip-->
-      <!--            label="是否启用"-->
-      <!--            prop="is_active"-->
-      <!--            sortable="custom"-->
-      <!--            width="120"-->
-      <!--          >-->
-      <!--            <template slot-scope="scope">-->
-      <!--              <el-tag :type="isActiveStatusFilter(scope.row.is_active)">{{-->
-      <!--                isActiveFilter(scope.row.is_active)-->
-      <!--              }}</el-tag>-->
-      <!--            </template>-->
-      <!--          </el-table-column>-->
-      <!--          <el-table-column-->
-      <!--            show-overflow-tooltip-->
-      <!--            label="规则名称"-->
-      <!--            prop="name"-->
-      <!--            width="200"-->
-      <!--            sortable="custom"-->
-      <!--          >-->
-      <!--          </el-table-column>-->
-      <!--          <el-table-column-->
-      <!--            show-overflow-tooltip-->
-      <!--            prop="start_string"-->
-      <!--            label="前缀字符"-->
-      <!--            width="250"-->
-      <!--            sortable="custom"-->
-      <!--          ></el-table-column>-->
-      <!--          <el-table-column-->
-      <!--            show-overflow-tooltip-->
-      <!--            label="中间字符生成长度"-->
-      <!--            prop="middle_string_len"-->
-      <!--            width="200"-->
-      <!--            sortable="custom"-->
-      <!--          ></el-table-column>-->
-      <!--          <el-table-column-->
-      <!--            show-overflow-tooltip-->
-      <!--            label="后缀字符"-->
-      <!--            width="200"-->
-      <!--            prop="end_string"-->
-      <!--          ></el-table-column>-->
-      <!--          <el-table-column-->
-      <!--            show-overflow-tooltip-->
-      <!--            label="分割字符"-->
-      <!--            prop="spilt_string"-->
-      <!--            width="200"-->
-      <!--            sortable="custom"-->
-      <!--          ></el-table-column>-->
-      <!--          <el-table-column-->
-      <!--            show-overflow-tooltip-->
-      <!--            label="操作"-->
-      <!--            width="180px"-->
-      <!--            fixed="right"-->
-      <!--          >-->
-      <!--            <template slot-scope="scope">-->
-      <!--              <el-button type="text" @click="handleSequencingEdit(scope.row)"-->
-      <!--                >编辑-->
-      <!--              </el-button>-->
-      <!--              <el-button type="text" @click="handleSequencingDelete(scope.row)"-->
-      <!--                >删除-->
-      <!--              </el-button>-->
-      <!--              <el-button-->
-      <!--                v-if="scope.row.is_active"-->
-      <!--                type="text"-->
-      <!--                @click="handleSequencingActivation(scope.row, false)"-->
-      <!--                >禁用-->
-      <!--              </el-button>-->
-      <!--              <el-button-->
-      <!--                v-else-->
-      <!--                type="text"-->
-      <!--                @click="handleSequencingActivation(scope.row, true)"-->
-      <!--                >启用-->
-      <!--              </el-button>-->
-      <!--            </template>-->
-      <!--          </el-table-column>-->
-      <!--        </el-table>-->
-      <!--        <el-pagination-->
-      <!--          :background="background"-->
-      <!--          :current-page="sequencing_query_form.page"-->
-      <!--          :layout="layout"-->
-      <!--          :page-size="sequencing_query_form.page_size"-->
-      <!--          :total="sequencing_all_count"-->
-      <!--          @current-change="handleSequencingCurrentChange"-->
-      <!--          @size-change="handleSequencingSizeChange"-->
-      <!--        ></el-pagination>-->
-      <!--        <sequencing-num-edit-->
-      <!--          ref="sequencing-edit"-->
-      <!--          @fetchData="fetchSequencingData"-->
-      <!--        ></sequencing-num-edit>-->
-      <!--      </el-tab-pane>-->
     </el-tabs>
   </div>
 </template>
@@ -541,7 +408,6 @@
 import ProjectNumEdit from "./components/ProjectNumEdit";
 import SampleNumEdit from "./components/SampleNumEdit";
 import AnalysisNumEdit from "./components/AnalysisNumEdit";
-import SequencingNumEdit from "./components/SequencingNumEdit";
 import {
   getProjectSerialNumberSettingList,
   deleteProjectSerialNumberSetting,
@@ -566,7 +432,6 @@ export default {
     ProjectNumEdit,
     SampleNumEdit,
     AnalysisNumEdit,
-    // SequencingNumEdit,
   },
   data() {
     return {

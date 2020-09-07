@@ -6,8 +6,8 @@
     @close="close"
   >
     <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-      <el-form-item label="模块类型" prop="module_type">
-        <el-select v-model="form.module_type" placeholder="请选择模块类型">
+      <el-form-item label="模块来源" prop="module_type">
+        <el-select v-model="form.module_type" placeholder="请选择模块来源">
           <el-option
             v-for="item in typeOptions"
             :key="item.key"

@@ -140,8 +140,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-MEDIA_URL = '/PictorBio/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "PictorBio")
+MEDIA_URL = '/data/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "PictorData")
 
 # 自定义用户模型
 AUTH_USER_MODEL = "pictor.User"

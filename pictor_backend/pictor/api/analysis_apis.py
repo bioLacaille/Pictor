@@ -23,10 +23,13 @@ from pictor.tasks.analysis_tasks import analysis_module_install_task
 
 
 class AnalysisModuleViewSet(viewsets.ModelViewSet):
-    """分析模块管理"""
+    """
+    分析模块管理
+    增刪改查，安裝/卸載
+    """
     filter_backends = (filters.OrderingFilter, filters.SearchFilter,)
-    search_fields = ('name', 'version', 'developer', 'email')
-    ordering_fields = ('name', 'version', 'developer', 'email')
+    search_fields = ('name', 'version',)
+    ordering_fields = '__all__'
     queryset = AnalysisModule.objects.order_by('-id').all()
     permission_classes = (permissions.IsAuthenticated, )
 
@@ -184,9 +187,6 @@ class AnalysisModuleViewSet(viewsets.ModelViewSet):
     @action(methods=['post'], detail=True)
     def stop_install(self, request, *args, **kwargs):
         instance = self.get_object()
-        file_path = instance.file_path
-        if os.path.exists(file_path):
-            shutil.rmtree(file_path)
         instance.status = MODULE_UN_DONE
         instance.save()
         result = {'success': True, 'messages': f'已停止安装模块'}
@@ -201,10 +201,12 @@ class AnalysisModuleViewSet(viewsets.ModelViewSet):
 
 
 class AnalysisParameterViewSet(viewsets.ModelViewSet):
-    """分析参数"""
+    """
+    分析参数， 增删改查
+    """
     filter_backends = (filters.OrderingFilter, filters.SearchFilter,)
     search_fields = ('module__name', 'module__version', 'name')
-    ordering_fields = ('name',)
+    ordering_fields = '__all__'
     queryset = AnalysisParameter.objects.order_by('-id').all()
     permission_classes = (permissions.IsAuthenticated, )
 
@@ -266,7 +268,6 @@ class AnalysisParameterViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         query_params = self.request.query_params
         not_page = query_params.get('not_page', False)
-        work_zone_id = query_params.get('work_zone', False)
         module_id = query_params.get('module', False)
         queryset = self.filter_queryset(self.get_queryset())
         if module_id:

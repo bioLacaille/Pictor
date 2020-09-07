@@ -7,7 +7,7 @@ import request from "@/utils/request";
 
 export function getAnalysisModuleList(params) {
   return request({
-    url: "/api/analysis-modules/",
+    url: "/api/analysis_modules/",
     method: "get",
     params,
   });
@@ -15,7 +15,7 @@ export function getAnalysisModuleList(params) {
 
 export function retrieveAnalysisModule(instance_id) {
   return request({
-    url: `/api/analysis-modules/${instance_id}/`,
+    url: `/api/analysis_modules/${instance_id}/`,
     method: "get",
   });
 }
@@ -25,7 +25,7 @@ export function createAnalysisModule(
   headers = { "Content-Type": "application/json;charset=UTF-8" }
 ) {
   return request({
-    url: "/api/analysis-modules/",
+    url: "/api/analysis_modules/",
     method: "post",
     headers: headers,
     data,
@@ -34,7 +34,7 @@ export function createAnalysisModule(
 
 export function deleteAnalysisModule(instance_id, data) {
   return request({
-    url: `/api/analysis-modules/${instance_id}/`,
+    url: `/api/analysis_modules/${instance_id}/`,
     method: "delete",
     data,
   });
@@ -47,7 +47,7 @@ export function updateAnalysisModule(
   headers = { "Content-Type": "application/json;charset=UTF-8" }
 ) {
   return request({
-    url: `/api/analysis-modules/${instance_id}/`,
+    url: `/api/analysis_modules/${instance_id}/`,
     method: method,
     headers: headers,
     data,
@@ -56,7 +56,7 @@ export function updateAnalysisModule(
 
 export function bulkDeleteAnalysisModule(data) {
   return request({
-    url: `/api/analysis-modules/bulk_delete/`,
+    url: `/api/analysis_modules/bulk_delete/`,
     method: "post",
     data,
   });
@@ -64,7 +64,7 @@ export function bulkDeleteAnalysisModule(data) {
 
 export function getAnalysisModuleTypes(params) {
   return request({
-    url: "/api/analysis-modules/module_types/",
+    url: "/api/analysis_modules/module_types/",
     method: "get",
     params,
   });
@@ -72,7 +72,7 @@ export function getAnalysisModuleTypes(params) {
 
 export function getAnalysisModuleStatus(params) {
   return request({
-    url: "/api/analysis-modules/module_status/",
+    url: "/api/analysis_modules/module_status/",
     method: "get",
     params,
   });
@@ -80,7 +80,7 @@ export function getAnalysisModuleStatus(params) {
 
 export function getAnalysisModuleVersions(data) {
   return request({
-    url: "/api/analysis-modules/versions/",
+    url: "/api/analysis_modules/versions/",
     method: "post",
     data,
     timeout: 60000,
@@ -89,7 +89,7 @@ export function getAnalysisModuleVersions(data) {
 
 export function installAnalysisModule(instance_id, data) {
   return request({
-    url: `/api/analysis-modules/${instance_id}/install/`,
+    url: `/api/analysis_modules/${instance_id}/install/`,
     method: "post",
     data,
   });
@@ -97,7 +97,7 @@ export function installAnalysisModule(instance_id, data) {
 
 export function uninstallAnalysisModule(instance_id, data) {
   return request({
-    url: `/api/analysis-modules/${instance_id}/uninstall/`,
+    url: `/api/analysis_modules/${instance_id}/uninstall/`,
     method: "post",
     data,
   });
@@ -105,7 +105,7 @@ export function uninstallAnalysisModule(instance_id, data) {
 
 export function stopInstallAnalysisModule(instance_id, data) {
   return request({
-    url: `/api/analysis-modules/${instance_id}/stop_install/`,
+    url: `/api/analysis_modules/${instance_id}/stop_install/`,
     method: "post",
     data,
   });

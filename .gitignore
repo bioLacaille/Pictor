@@ -16,7 +16,7 @@ public/video
 *.zip
 *.7z
 # Byte-compiled / optimized / DLL files
-PictorBio
+PictorData
 *.pyc
 __pycache__
 */__pycache__

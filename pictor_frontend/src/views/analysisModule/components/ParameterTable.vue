@@ -91,7 +91,7 @@
       ></el-pagination>
       <parameter-edit
         ref="parameter-edit"
-        @fetchData="fetchData"
+        @fetchParameterData="fetchData"
       ></parameter-edit>
     </div>
     <div slot="footer" class="dialog-footer">

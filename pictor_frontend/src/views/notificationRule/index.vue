@@ -5,12 +5,9 @@
         <el-button icon="el-icon-plus" type="primary" @click="handleAdd"
           >添加
         </el-button>
-        <!--        <el-button-->
-        <!--          icon="el-icon-delete"-->
-        <!--          type="danger"-->
-        <!--          @click="handleAnalysisDelete"-->
-        <!--          >删除-->
-        <!--        </el-button>-->
+        <el-button icon="el-icon-delete" type="danger" @click="handleDelete"
+          >删除
+        </el-button>
       </vab-query-form-left-panel>
       <vab-query-form-right-panel>
         <el-form
@@ -20,10 +17,7 @@
           @submit.native.prevent
         >
           <el-form-item>
-            <el-input
-              v-model="query_form.search"
-              placeholder="项目编号/项目名称"
-            />
+            <el-input v-model="query_form.search" placeholder="名称" />
           </el-form-item>
           <el-form-item>
             <el-button
@@ -43,13 +37,14 @@
       v-loading="listLoading"
       :data="list"
       :element-loading-text="elementLoadingText"
+      @selection-change="setSelectRows"
       @sort-change="tableSortChange"
     >
-      <!--      <el-table-column-->
-      <!--        show-overflow-tooltip-->
-      <!--        type="selection"-->
-      <!--        width="55"-->
-      <!--      ></el-table-column>-->
+      <el-table-column
+        show-overflow-tooltip
+        type="selection"
+        width="55"
+      ></el-table-column>
       <el-table-column
         show-overflow-tooltip
         label="是否启用"

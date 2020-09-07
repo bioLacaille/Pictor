@@ -8,7 +8,6 @@
         <el-button icon="el-icon-delete" type="danger" @click="handleDelete"
           >删除
         </el-button>
-        todo: 安装模块/卸载模块
       </vab-query-form-left-panel>
       <vab-query-form-right-panel>
         <el-form
@@ -51,7 +50,7 @@
       ></el-table-column>
       <el-table-column
         show-overflow-tooltip
-        label="模块类型"
+        label="模块来源"
         prop="module_type"
         sortable="custom"
       >

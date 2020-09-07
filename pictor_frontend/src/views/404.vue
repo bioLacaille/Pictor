@@ -32,7 +32,7 @@
             <div class="bullshit-oops">{{ oops }}</div>
             <div class="bullshit-headline">{{ headline }}</div>
             <div class="bullshit-info">{{ info }}</div>
-            <a class="bullshit-return-home" href="#/index">
+            <a class="bullshit-return-home" href="#/workzones">
               {{ jumpTime }}s&nbsp;{{ btn }}
             </a>
           </div>
@@ -51,7 +51,7 @@ export default {
       oops: "抱歉!",
       headline: "当前页面不存在...",
       info: "请检查您输入的网址是否正确，或点击下面的按钮返回首页。",
-      btn: "返回首页",
+      btn: "返回工作台",
       timer: 0,
     };
   },
@@ -67,7 +67,7 @@ export default {
         if (this.jumpTime) {
           this.jumpTime--;
         } else {
-          this.$router.push({ path: "/" });
+          this.$router.push({ path: "/workzones" });
           this.$store.dispatch("tagsBar/delOthersRoutes", {
             path: "/",
           });

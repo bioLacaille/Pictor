@@ -465,6 +465,7 @@ import {
   startAnalysis,
 } from "@/api/analysis";
 import { getProjectList, retrieveProject } from "@/api/project";
+import { getAnalysisSerialNumber } from "@/api/serialNumberSetting";
 import SaveParameter from "./SaveParameter";
 import SelectDataset from "./SelectDataset";
 
@@ -572,11 +573,16 @@ export default {
         this.thirdDisplay = "none";
         this.dialogFormVisible = true;
       } else {
+        this.get_number();
         this.title = "新增分析任务";
         this.edit_type = "create";
         this.fetchAnalysisModules();
         this.dialogFormVisible = true;
       }
+    },
+    async get_number() {
+      const data = await getAnalysisSerialNumber();
+      this.form.serial_number = data.results;
     },
     close() {
       this.analysis_module_instance = {

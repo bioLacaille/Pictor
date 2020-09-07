@@ -48,7 +48,7 @@
       <el-form-item label="是否启用该配置" prop="is_active">
         <el-checkbox v-model.trim="form.is_active"></el-checkbox>
       </el-form-item>
-      <el-form-item label="项目描述/备注" prop="remark">
+      <el-form-item label="描述/备注" prop="remark">
         <el-input
           v-model.trim="form.remark"
           type="textarea"
@@ -77,7 +77,7 @@ export default {
       form: {
         id: "",
         name: "假设接口",
-        domain: "http://127.0.0.1:8000/analysis/",
+        domain: "http://127.0.0.1:8000/fake_api/analysis_tasks",
         success_code: "200 ",
         error_code: "400",
         start_uri: "start",
@@ -85,8 +85,8 @@ export default {
         continue_uri: "continue",
         reset_uri: "reset",
         status_uri: "status",
-        result_uri: "result",
-        log_uri: "log",
+        result_uri: "results",
+        log_uri: "logs",
         is_active: true,
         remark: "",
       },
@@ -168,7 +168,7 @@ export default {
       this.$refs["form"].resetFields();
       this.form = this.$options.data().form;
       this.dialogFormVisible = false;
-      this.$emit("fetchData");
+      // this.$emit("fetchData");
     },
     save() {
       this.$refs["form"].validate(async (valid) => {

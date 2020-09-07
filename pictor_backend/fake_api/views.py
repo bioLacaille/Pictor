@@ -2,7 +2,7 @@ from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from fake_api.tests import fake_log
+from fake_api.fake_data.logs import log
 
 
 class AnalysisTaskViewSet(viewsets.ViewSet):
@@ -130,7 +130,7 @@ class AnalysisTaskViewSet(viewsets.ViewSet):
     @action(methods=['post'], detail=False)
     def logs(self, request, *args, **kwargs):
         serial_number = request.data.get('serial_number', '')
-        result = {'code': 200, 'messages': f'test!分析任务日志', 'results': fake_log}
+        result = {'code': 200, 'messages': f'test!分析任务日志', 'results': log}
         return Response(result, status=status.HTTP_200_OK)
 
 

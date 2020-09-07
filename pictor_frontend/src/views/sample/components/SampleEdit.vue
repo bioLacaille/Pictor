@@ -53,6 +53,7 @@
 <script>
 import { createSample, updateSample, retrieveSample } from "@/api/sample";
 import { getProjectList } from "@/api/project";
+import { getSampleSerialNumber } from "@/api/serialNumberSetting";
 
 export default {
   name: "ProjectEdit",
@@ -91,6 +92,7 @@ export default {
     },
     showEdit(row) {
       if (!row) {
+        this.get_number();
         this.title = "添加";
         this.edit_type = "create";
       } else {
@@ -121,6 +123,10 @@ export default {
       this.form = this.$options.data().form;
       this.dialogFormVisible = false;
       this.$emit("fetchData");
+    },
+    async get_number() {
+      const data = await getSampleSerialNumber();
+      this.form.serial_number = data.results;
     },
     save() {
       this.$refs["form"].validate(async (valid) => {

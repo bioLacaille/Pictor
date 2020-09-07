@@ -8,24 +8,30 @@
       :interval="3000"
       indicator-position="none"
     >
-      <el-carousel-item v-for="(item, index) in adList" :key="index">
-        <el-tag type="warning">
-          当前工作区:{{ workZone.serial_number }}({{ workZone.name }})</el-tag
-        >
-        <el-tooltip
-          v-if="item.content"
-          class="item"
-          effect="dark"
-          :content="item.content"
-          placement="top"
-        >
-          <a v-if="item.link" target="_blank" :href="item.link">
-            {{ item.title }}</a
+      <div v-if="adList.length > 0">
+        <el-carousel-item v-for="(item, index) in adList" :key="index">
+          <el-tag type="warning">
+            当前工作区:{{ workZone.serial_number }}({{ workZone.name }})</el-tag
           >
+          <el-tooltip
+            v-if="item.content"
+            class="item"
+            effect="dark"
+            :content="item.content"
+            placement="top"
+          >
+            <a v-if="item.link" target="_blank" :href="item.link">
+              {{ item.title }}</a
+            >
+            <span v-else>{{ item.title }}</span>
+          </el-tooltip>
           <span v-else>{{ item.title }}</span>
-        </el-tooltip>
-        <span v-else>{{ item.title }}</span>
-      </el-carousel-item>
+        </el-carousel-item>
+      </div>
+      <div v-else></div>
+      <el-tag type="warning">
+        当前工作区:{{ workZone.serial_number }}({{ workZone.name }})</el-tag
+      >
     </el-carousel>
   </div>
 </template>

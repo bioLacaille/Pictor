@@ -64,6 +64,13 @@ export function activationAnalysisSerialNumberSetting(instance_id, data) {
   });
 }
 
+export function getAnalysisSerialNumber() {
+  return request({
+    url: `/api/analysis_nums/valid_number/`,
+    method: "get",
+  });
+}
+
 /////////////////////////////////////////////////
 
 export function getProjectSerialNumberSettingList(params) {
@@ -122,6 +129,13 @@ export function activationProjectSerialNumberSetting(instance_id, data) {
     url: `/api/project_nums/${instance_id}/activation/`,
     method: "post",
     data,
+  });
+}
+
+export function getProjectSerialNumber() {
+  return request({
+    url: `/api/project_nums/valid_number/`,
+    method: "get",
   });
 }
 
@@ -186,63 +200,9 @@ export function activationSampleSerialNumberSetting(instance_id, data) {
   });
 }
 
-/////////////////////////////////////////////////
-
-export function getSequencingSerialNumberSettingList(params) {
+export function getSampleSerialNumber() {
   return request({
-    url: "/api/sequencing_nums/",
+    url: `/api/sample_nums/valid_number/`,
     method: "get",
-    params,
-  });
-}
-
-export function retrieveSequencingSerialNumberSetting(instance_id) {
-  return request({
-    url: `/api/sequencing_nums/${instance_id}/`,
-    method: "get",
-  });
-}
-
-export function createSequencingSerialNumberSetting(data) {
-  return request({
-    url: "/api/sequencing_nums/",
-    method: "post",
-    data,
-  });
-}
-
-export function deleteSequencingSerialNumberSetting(instance_id, data) {
-  return request({
-    url: `/api/sequencing_nums/${instance_id}/`,
-    method: "delete",
-    data,
-  });
-}
-
-export function updateSequencingSerialNumberSetting(
-  instance_id,
-  data,
-  method = "put"
-) {
-  return request({
-    url: `/api/sequencing_nums/${instance_id}/`,
-    method: method,
-    data,
-  });
-}
-
-export function bulkDeleteSequencingSerialNumberSetting(data) {
-  return request({
-    url: `/api/sequencing_nums/bulk_delete/`,
-    method: "post",
-    data,
-  });
-}
-
-export function activationSequencingSerialNumberSetting(instance_id, data) {
-  return request({
-    url: `/api/sequencing_nums/${instance_id}/activation/`,
-    method: "post",
-    data,
   });
 }
