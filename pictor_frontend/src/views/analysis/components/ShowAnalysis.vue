@@ -241,7 +241,7 @@ export default {
         started_time: "",
         finished_time: "",
         status: "",
-        process: "",
+        process: 0,
         creator: "",
       },
       parameter_input_list: [
@@ -274,10 +274,10 @@ export default {
         showBorder: true, // 表格是否显示边框
         showCheckbox: true, // 是否显示复选框
         showIndex: true, // 是否显示顺序号
-        clickFileType: 1, // 点击文件触发形式, 0为点击文件即下载/1为点击文件为选择
+        clickFileType: 0, // 点击文件触发形式, 0为点击文件即下载/1为点击文件为选择
         checkedFileCallBack: true, // 是否返回已选文件
         onlyShowOneList: true,
-        dataType: 10,
+        dataType: 30,
         currentPath: "",
       },
     };
@@ -295,6 +295,8 @@ export default {
       this.dialogShowVisible = true;
     },
     close() {
+      this.currentTab = "info";
+      this.dataset_param.currentPath = "";
       this.dialogShowVisible = false;
     },
     async getAnalysisDetail(instance_id) {
@@ -310,11 +312,6 @@ export default {
         this.project_instance = results.project;
         project_id = results.project.id;
       }
-      console.log(
-        "getAnalysisDetail analysis_module_instance",
-        this.analysis_module_instance
-      );
-      console.log("getAnalysisDetail project", this.project_instance);
       this.parameter_input_list = results.analysis_parameter;
       this.analysis = Object.assign(
         {},
@@ -330,10 +327,15 @@ export default {
           started_time: results.started_time,
           finished_time: results.finished_time,
           status: results.status,
-          process: results.process,
+          process: parseInt(results.process),
           email_list: results.email_list,
         }
       );
+      if (results.project) {
+        this.dataset_param.currentPath = `${results.project.serial_number}/${results.serial_number}`;
+      } else {
+        this.dataset_param.currentPath = results.serial_number;
+      }
       this.setFullCommand();
     },
     setFullCommand() {
@@ -386,8 +388,19 @@ export default {
       }
       if (obj.$vnode.key === "result") {
         console.log("result", obj.$vnode.key);
-        this.dataType = 30; // 项目数据
-        this.currentPath = ""; // 分析数据路径
+        this.dataset_param.dataType = 30; // 项目数据
+        if (this.project_instance) {
+          this.dataset_param.currentPath = `${this.project_instance.serial_number}/${this.analysis.serial_number}`;
+        } else {
+          this.dataset_param.currentPath = this.analysis.serial_number;
+        }
+        this.$refs["analysis-dataset"].setDataCurrentPath(
+          this.dataset_param.currentPath
+        );
+        this.$refs["analysis-dataset"].setDataCurrentType(
+          this.dataset_param.dataType
+        );
+        this.$refs["analysis-dataset"].getFileList(this.dataset_param.dataType);
       }
     },
     /**

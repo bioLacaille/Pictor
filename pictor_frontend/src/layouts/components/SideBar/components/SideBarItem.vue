@@ -42,7 +42,7 @@ export default {
   },
   data() {
     this.onlyOneChild = null;
-    return {};
+    return { onlyOneChildren: null };
   },
   computed: {
     menuComponent() {
@@ -52,8 +52,10 @@ export default {
           this.onlyOneChildren.notShowChildren) &&
         !this.item.alwaysShow
       ) {
+        console.log("MenuItem", this.onlyOneChildren);
         return "MenuItem";
       } else {
+        console.log("Submenu", this.onlyOneChildren);
         return "Submenu";
       }
     },

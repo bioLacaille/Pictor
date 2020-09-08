@@ -21,10 +21,16 @@ DELETE_URI = {
 
 def get_task_interface(uri_type='start_uri'):
     task_interface = AnalysisTaskInterface.objects.get_active().first()
+    api_logger.debug(f'get_task_interface : {task_interface}')
     if task_interface:
         domain = task_interface.domain
+        if not domain.endswith('/'):
+            domain = f'{domain}/'
+        api_logger.debug(f'get_task_interface domain: {task_interface.domain}')
         uri = getattr(task_interface, uri_type, '')
+        api_logger.debug(f'get_task_interface uri: {uri}')
         url = urllib.parse.urljoin(domain, uri)
+        api_logger.debug(f'get_task_interface url: {url}')
         success_code = task_interface.success_code
         error_code = task_interface.error_code
     else:
@@ -35,4 +41,5 @@ def get_task_interface(uri_type='start_uri'):
         error_code = DELETE_URI['error_code']
     if not url.endswith('/'):
         url = f'{url}/'
+    api_logger.debug(f'{url}')
     return url, success_code, error_code

@@ -129,7 +129,7 @@ export default {
   watch: {
     $route: {
       handler(route) {
-        this.redirect = (route.query && route.query.redirect) || "/";
+        this.redirect = (route.query && route.query.redirect) || "/workzones";
       },
       immediate: true,
     },

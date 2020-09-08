@@ -318,6 +318,12 @@ export default {
     },
     // 点击文件夹/文件, 若为文件夹, 则进入下级, 若为文件, 则提供下载/选择
     async clickDataFile(row, isFolder) {
+      console.log("clickDataFile clickFileType", this.clickFileType);
+      console.log("clickDataFile isFolder", isFolder);
+      console.log(
+        "clickDataFile this.clickFileType === 0",
+        this.clickFileType === 0
+      );
       if (!isFolder) {
         if (this.clickFileType === 0) {
           const file_url = row.file_uri;
@@ -327,16 +333,19 @@ export default {
           document.body.appendChild(link);
           link.click();
           link.remove();
-          return;
+          return true;
         } else {
           row._checked = !row._checked;
           this.$refs["wl-table"].toggleRowSelection(row, row._checked);
           const selected_data = this.$refs["wl-table"].selection;
           this.$emit("setCheckFiles", selected_data);
-          return;
+          return true;
         }
+      } else {
+        console.log("clickDataFile dataType", this.dataType);
+        console.log("clickDataFile relative_path", row.relative_path);
+        this.$emit("getFileList", this.dataType, row.relative_path);
       }
-      this.$emit("getFileList", this.dataType, row.relative_path);
     },
     // 列表模式记录多选数据
     listItemCheck(check, val) {

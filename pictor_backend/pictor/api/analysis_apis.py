@@ -373,13 +373,15 @@ class AnalysisViewSet(viewsets.ModelViewSet):
         query_params = self.request.query_params
         not_page = query_params.get('not_page', False)
         work_zone_id = query_params.get('work_zone', False)
+        api_logger.debug(f'{work_zone_id}')
         analysis_status = query_params.get('status', False)
         project_id = query_params.get('project', False)
         try:
-            work_zone = WorkZone.ordering.get(pk=int(work_zone_id))
+            work_zone = WorkZone.objects.get(pk=int(work_zone_id))
         except:
             work_zone = None
         queryset = self.filter_queryset(self.get_queryset())
+        api_logger.debug(f'{work_zone}')
         if work_zone:
             queryset = queryset.filter(work_zone=work_zone)
         if analysis_status:
@@ -440,15 +442,13 @@ class AnalysisViewSet(viewsets.ModelViewSet):
         queryset = self.filter_queryset(self.get_queryset())
         if work_zone:
             queryset = queryset.filter(work_zone=work_zone)
-        today = datetime.now()
         total = queryset.distinct().count()
-        month_success_count = queryset.filter(created_time__year=today.year,
-                                              created_time__month=today.month,
+        month = datetime.now().strftime('%Y-%m')
+        month_success_count = queryset.filter(created_time__startswith=month,
                                               status=ANALYSIS_SUCCESS).distinct().count()
-        month_avg_time = task_avg_time(queryset.filter(created_time__year=today.year,
-                                                       created_time__month=today.month).distinct())
-        results = [{'key': '总任务数', 'value': total}, {'key': '本月任务平均处理时间', 'value': month_success_count},
-                   {'key': '本月完成任务数', 'value': month_avg_time}]
+        month_avg_time = task_avg_time(queryset.filter(created_time__startswith=month).distinct())
+        results = [{'key': '总任务数', 'value': total}, {'key': '本月完成任务数', 'value': month_success_count},
+                   {'key': '本月任务平均处理时间', 'value': f'{month_avg_time}分钟'}]
         result = {'success': True, 'messages': f'当前统计信息!',
                   'results': results}
         return Response(result, status=status.HTTP_200_OK)

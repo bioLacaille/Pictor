@@ -71,7 +71,7 @@ export const asyncRoutes = [
         meta: {
           title: "统计图表",
           icon: "chart-pie",
-          permissions: ["user", "super_user", "admin", "super_admin"],
+          permissions: ["admin", "super_admin"],
           badge: "Pro",
         },
       },
@@ -89,7 +89,7 @@ export const asyncRoutes = [
         meta: {
           title: "实时监控",
           icon: "archive",
-          permissions: ["user", "super_user", "admin", "super_admin"],
+          permissions: ["admin", "super_admin"],
           badge: "Pro",
         },
       },
@@ -107,7 +107,6 @@ export const asyncRoutes = [
         meta: {
           title: "项目",
           icon: "weight-hanging",
-          permissions: ["user", "super_user", "admin", "super_admin"],
         },
       },
     ],
@@ -124,7 +123,6 @@ export const asyncRoutes = [
         meta: {
           title: "样本",
           icon: "align-justify",
-          permissions: ["user", "super_user", "admin", "super_admin"],
         },
       },
     ],
@@ -141,7 +139,6 @@ export const asyncRoutes = [
         meta: {
           title: "数据",
           icon: "database",
-          permissions: ["user", "super_user", "admin", "super_admin"],
         },
       },
     ],
@@ -158,7 +155,6 @@ export const asyncRoutes = [
         meta: {
           title: "分析任务",
           icon: "tasks",
-          permissions: ["user", "super_user", "admin", "super_admin"],
         },
       },
     ],
@@ -168,14 +164,21 @@ export const asyncRoutes = [
     component: Layout,
     redirect: "noRedirect",
     name: "setting",
-    meta: { title: "设置", icon: "wallet", permissions: ["admin"] },
+    meta: {
+      title: "设置",
+      icon: "wallet",
+      permissions: ["super_user", "admin", "super_admin"],
+    },
     children: [
       {
         path: "uploadSetting",
         name: "uploadSetting",
         icon: "wallet",
         component: () => import("@/views/serialNumberSetting/index"),
-        meta: { title: "上传规则设置(todo)" },
+        meta: {
+          title: "上传规则设置(todo)",
+          permissions: ["super_user", "admin", "super_admin"],
+        },
       },
       {
         path: "serialNumSetting",

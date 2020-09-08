@@ -19,5 +19,9 @@ CELERY_TIMEZONE = 'Asia/Shanghai'
 
 # todo 将定时任务转为页面配置
 CELERY_BEAT_SCHEDULE = {
-
+    # 检查任务
+    'check_analysis_running_status': {
+        'task': 'check_analysis_running_status',
+        'schedule': 30
+    },
 }

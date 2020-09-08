@@ -30,8 +30,7 @@
       </div>
     </div>
     <el-divider content-position="center">
-      <i class="el-icon-mobile-phone"></i
-      ><el-tag type="primary">项目(todo:点击弹出管理弹窗)</el-tag>
+      <i class="el-icon-mobile-phone"></i><el-tag type="primary">项目</el-tag>
     </el-divider>
     <div class="elp-card-grid">
       <div class="elp-card-grid-body">
@@ -43,7 +42,9 @@
           <div class="elp-card-grid-item">
             <div>
               <img src="../../assets/project.png" />
-              <span>{{ project.serial_number }}({{ project.name }})</span>
+              <el-button type="text" size="medium" @click="handleMange(project)"
+                >{{ project.serial_number }}({{ project.name }})</el-button
+              >
             </div>
             <div style="word-break: break-all;">{{ project.remark }}</div>
             <div>
@@ -56,7 +57,7 @@
     </div>
     <el-divider content-position="center">
       <i class="el-icon-mobile-phone"></i
-      ><el-tag type="primary">分析任务(todo:点击弹出查看弹窗)</el-tag>
+      ><el-tag type="primary">分析任务</el-tag>
     </el-divider>
     <div class="elp-card-grid">
       <div class="elp-card-grid-body">
@@ -67,8 +68,13 @@
         >
           <div class="elp-card-grid-item">
             <div>
-              <img src="../../assets/project.png" />
-              <span>{{ analysis.serial_number }}</span>
+              <img src="../../assets/analysis.jpeg" />
+              <el-button
+                type="text"
+                size="medium"
+                @click="handleShowAnalysis(analysis)"
+                >{{ analysis.serial_number }}</el-button
+              >
             </div>
             <div>
               {{ analysis.analysis_module.name }}@{{
@@ -148,6 +154,8 @@
         </elp-card>
       </div>
     </div>
+    <project-manage ref="manage_project"></project-manage>
+    <show-analysis ref="show_analysis"></show-analysis>
   </div>
 </template>
 <script>
@@ -159,10 +167,14 @@ import { getProjectList } from "@/api/project";
 import { getWorkZoneMemberList, getWorkZoneMemberTypes } from "@/api/workzone";
 import { getAnalysisList, getAnalysisStatusList } from "@/api/analysis";
 import { baseURL } from "../../../src/config/settings";
+import ShowAnalysis from "../analysis/components/ShowAnalysis";
+import ProjectManage from "../project/components/ProjectManage";
 import store from "@/store";
 export default {
   components: {
     ElpCard,
+    ShowAnalysis,
+    ProjectManage,
   },
   data() {
     return {
@@ -206,6 +218,12 @@ export default {
     this.fetchWorkZoneUsers();
   },
   methods: {
+    handleShowAnalysis(row) {
+      this.$refs["show_analysis"].show(row);
+    },
+    handleMange(row) {
+      this.$refs["manage_project"].showMange(row);
+    },
     getThisTime() {
       const hour = new Date().getHours();
       this.this_time =

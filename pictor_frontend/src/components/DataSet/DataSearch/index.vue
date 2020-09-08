@@ -111,6 +111,7 @@ export default {
   },
   watch: {
     currentPath(val, old) {
+      console.log("datasearch currentPath", val);
       this.path_search = val;
       this.prv_path.push(old);
     },

@@ -35,7 +35,7 @@ def task_avg_time(analysis_list):
             minutes = (datetime.now() - started_time).seconds / 60
         total_minutes = total_minutes + minutes
     if total:
-        avg = total_minutes / total
+        avg = round(total_minutes / total, 2)
     else:
         avg = 0
     return avg

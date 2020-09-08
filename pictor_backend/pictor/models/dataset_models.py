@@ -6,7 +6,7 @@ Email: fualan1990@gmail.com
 from django.db import models
 from django.utils import timezone
 from pictor.utils.base_heplers import change_dict_for_model_choices
-from pictor.configures import DATASET_TYPE, FILE_TYPE, PUBLIC_DATA, FILE
+from pictor.configures import DATASET_TYPE, FILE_TYPE, PUBLIC_DATA, FILE, UPLOAD, SOURCE_TYPE
 import uuid
 import os
 from pictor.utils.dataset_helpers import get_data_uri, get_data_directory_path
@@ -21,6 +21,7 @@ class DataSet(models.Model):
     data_type = models.IntegerField(default=PUBLIC_DATA, choices=change_dict_for_model_choices(DATASET_TYPE),
                                     verbose_name='数据类型')
     file_type = models.IntegerField(default=FILE, choices=change_dict_for_model_choices(FILE_TYPE), verbose_name='文件类型')
+    source_type = models.IntegerField(default=UPLOAD, choices=change_dict_for_model_choices(SOURCE_TYPE), verbose_name='文件来源')
     file_size = models.IntegerField(default=0, verbose_name='文件大小(KB)')
     uploaded = models.BooleanField(default=False, verbose_name='是否完整上传')
     file_md5 = models.CharField(default='', max_length=255, verbose_name='文件MD5')

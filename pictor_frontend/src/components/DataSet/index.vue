@@ -4,8 +4,8 @@
       <!-- 头部按钮区 -->
       <data-header
         :data-header-visible="dataHeaderVisible"
-        :data-type="dataType"
-        :current-path="currentPath"
+        :data-type="current_data_type"
+        :current-path="current_path"
         :show-list="show_list"
         :checked-files="checked_files"
         @getFileList="getFileList"
@@ -15,8 +15,8 @@
       ></data-header>
       <data-search
         :data-search-visible="dataSearchVisible"
-        :data-type="dataType"
-        :current-path="currentPath"
+        :data-type="current_data_type"
+        :current-path="current_path"
         :show-list="show_list"
         :checked-files="checked_files"
         @getFileList="getFileList"
@@ -28,8 +28,8 @@
       <wlExplorer
         :ref="'explorer' + dataType"
         :data-explorer-visible="dataExplorerVisible"
-        :data-type="dataType"
-        :current-path="currentPath"
+        :data-type="current_data_type"
+        :current-path="current_path"
         :columns="filer_table_columns"
         :data="filer_table_data"
         :props="explorer_prop"
@@ -347,6 +347,9 @@ export default {
     },
     // 获取文件数据
     async getFileList(data_type, current_path = null, search = "") {
+      console.log("getFileList data_type", data_type);
+      console.log("getFileList current_path", current_path);
+      console.log("getFileList search", search);
       this.listLoading = true;
       if (!data_type) {
         const currentTab_key = store.getters["uploader/dataType"];
@@ -365,6 +368,7 @@ export default {
         current_path: current_path,
         search: search,
       };
+      console.log("getFileList param", param);
       if (this.onlyFile && !this.onlyDirectory) {
         param["file_type"] = 10;
       }

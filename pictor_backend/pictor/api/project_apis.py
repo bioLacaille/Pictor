@@ -149,8 +149,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
                              {'key': '本月新增样本数', 'value': month_avg_count},
                              ]
         analysis_statistics = [{'key': '总任务数', 'value': analysis_total},
-                               {'key': '本月任务平均处理时间', 'value': analysis_month_success_count},
-                               {'key': '本月完成任务数', 'value': analysis_month_avg_time}]
+                               {'key': '本月完成任务数', 'value': analysis_month_success_count},
+                                   {'key': '本月任务平均处理时间', 'value': f'{analysis_month_avg_time}分钟'}]
         result = {'success': True, 'messages': f'当前统计信息!',
                   'results': {'sample_statistics': sample_statistics, 'analysis_statistics': analysis_statistics}}
         return Response(result, status=status.HTTP_200_OK)

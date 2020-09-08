@@ -80,7 +80,7 @@ class AnalysisTaskViewSet(viewsets.ViewSet):
     ## 响应:
         code: 必需, 返回码
         messages: 可空, 返回信息
-        results: 必需, 返回分析任务状态
+        results: {'status': code, 'process': 11}
         # 分析状态
         ANALYSIS_PENDING = 0
         ANALYSIS_UN_START = 10
@@ -102,7 +102,7 @@ class AnalysisTaskViewSet(viewsets.ViewSet):
     @action(methods=['post'], detail=False)
     def status(self, request, *args, **kwargs):
         serial_number = request.data.get('serial_number', '')
-        result = {'code': 200, 'messages': f'test!分析任务状态', 'results': {}}
+        result = {'code': 200, 'messages': f'test!分析任务状态', 'results': {'status': 50, 'process': 100}}
         return Response(result, status=status.HTTP_200_OK)
 
     """

@@ -359,7 +359,7 @@
         </el-tab-pane>
         <el-tab-pane key="project_dataset" label="数据" name="project_dataset">
           <dataset
-            ref="analysis-dataset"
+            ref="project_dataset"
             :data-header-visible="dataset_param.dataHeaderVisible"
             :data-search-visible="dataset_param.dataSearchVisible"
             :data-explorer-visible="dataset_param.dataExplorerVisible"
@@ -513,8 +513,15 @@ export default {
       }
       if (obj.$vnode.key === "project_dataset") {
         console.log("changeTab", obj.$vnode.key);
-        this.dataType = 30; // 项目数据
-        this.currentPath = ""; // 分析数据路径
+        this.dataset_param.dataType = 30; // 项目数据
+        this.dataset_param.currentPath = this.project.serial_number;
+        this.$refs["project_dataset"].setDataCurrentPath(
+          this.dataset_param.currentPath
+        );
+        this.$refs["project_dataset"].setDataCurrentType(
+          this.dataset_param.dataType
+        );
+        this.$refs["project_dataset"].getFileList(this.dataset_param.dataType);
       }
     },
     handleSampleSelectData(row) {
