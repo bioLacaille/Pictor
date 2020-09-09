@@ -4,15 +4,15 @@ from pictor.api import Authentication, ActionLogViewSet, NotificationRuleViewSet
     WorkZoneViewSet, UserViewSet, SampleViewSet, AnalysisModuleViewSet, DataSetViewSet, AnalysisViewSet, \
     AnalysisParameterViewSet, AnalysisTaskInterfaceViewSet, AnnouncementViewSet, \
     AnalysisSerialNumberSettingViewSet, ProjectSerialNumberSettingViewSet, SampleSerialNumberSettingViewSet, \
-    StatisticViewSet
+    StatisticViewSet, PermissionViewSet
 router_v1 = routers.DefaultRouter()
 
 router_v1.register('users', UserViewSet, basename='users')
 router_v1.register('action_logs', ActionLogViewSet, basename='action_logs')
 router_v1.register('notifications', NotificationViewSet, basename='notifications')
 
+router_v1.register('work_zones', WorkZoneViewSet, basename='work_zones')
 router_v1.register('projects', ProjectViewSet, basename='projects')
-router_v1.register('work-zones', WorkZoneViewSet, basename='work_zones')
 router_v1.register('samples', SampleViewSet, basename='samples')
 
 router_v1.register('dataset', DataSetViewSet, basename='dataset')
@@ -29,6 +29,8 @@ router_v1.register('analysis_parameters', AnalysisParameterViewSet, basename='an
 router_v1.register('analysis_task_interface', AnalysisTaskInterfaceViewSet, basename='analysis_task_interface')
 router_v1.register('notification_rules', NotificationRuleViewSet, basename='notification_rules')
 router_v1.register('announcements', AnnouncementViewSet, basename='announcements')
+
+router_v1.register('permissions', PermissionViewSet, basename='permissions')
 
 urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),

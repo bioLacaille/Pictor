@@ -3,11 +3,13 @@ Author: Alan Fu
 Email: fualan1990@gmail.com
 工作区API接口
 1.新增工作区
-2.修改工作区信息
-3.工作区列表
-4.调整工作区成员
-5.删除工作区
-6.工作区成员类型
+2.编辑工作区信息
+3.获取工作区详情
+4.工作区查询
+5.获取/调整工作区成员
+6.删除工作区
+7.工作区成员类型
+8.验证当前用户是否工作区成员
 """
 from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions
@@ -18,9 +20,8 @@ from pictor.serializers.workzone_serializers import WorkZoneActionSerializer, Wo
     WorkZoneListSerializer, WorkZoneMemberBaseSerializer, UserBaseSerializer
 from pictor.utils.applog_helpers import api_logger
 from pictor.utils.actionlog_helpers import action_log
-from pictor.configures import CREATE_ACTION_TYPE, UPDATE_ACTION_TYPE, DELETE_ACTION_TYPE, ZONE_GUEST, ZONE_ADMIN, \
-    MEMBER_TYPE_ZH, MEMBER_TYPE
-from pictor.utils.auth_helpers import IsWorkZoneAdminForWorZone
+from pictor.configures import CREATE_ACTION_TYPE, UPDATE_ACTION_TYPE, DELETE_ACTION_TYPE, ZONE_ADMIN, \
+    MEMBER_TYPE_ZH, MEMBER_TYPE, ADMIN
 
 
 class WorkZoneViewSet(viewsets.ModelViewSet):
@@ -29,14 +30,10 @@ class WorkZoneViewSet(viewsets.ModelViewSet):
     search_fields = ('serial_number', 'name', 'remark')
     ordering_fields = ('serial_number', 'name', 'remark')
     queryset = WorkZone.objects.order_by('-id').all()
-
-    def get_permissions(self):
-        if self.action == 'update' or self.action == 'partial_update' or self.action == 'destroy' \
-                or self.action == 'members':
-            return [permissions.IsAuthenticated(), IsWorkZoneAdminForWorZone(), ]
-        return [permissions.IsAuthenticated(), ]
+    permission_classes = (permissions.IsAuthenticated, )
 
     def create(self, request, *args, **kwargs):
+        """新增工作区"""
         serializer = self.get_serializer(data=request.data)
         serial_number = request.data.get('serial_number', '')
         if WorkZone.objects.filter(serial_number=serial_number).first():
@@ -52,7 +49,7 @@ class WorkZoneViewSet(viewsets.ModelViewSet):
         return Response(result, status=status.HTTP_200_OK, headers=headers)
 
     def update(self, request, *args, **kwargs):
-        # 仅工作区管理员/系统管理员可进行修改 无法修改工作区编号
+        """编辑工作区信息"""
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         old_instance = self.get_object()
@@ -72,23 +69,30 @@ class WorkZoneViewSet(viewsets.ModelViewSet):
         return Response(result, status=status.HTTP_200_OK)
 
     def partial_update(self, request, *args, **kwargs):
+        """修改工作区信息"""
         kwargs['partial'] = True
         return self.update(request, *args, **kwargs)
 
     def retrieve(self, request, *args, **kwargs):
+        """获取工作区详情"""
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         result = {'success': True, 'messages': f'获取工作区信息:{instance.__str__()}!', 'results': serializer.data}
         return Response(result, status=status.HTTP_200_OK)
 
     def list(self, request, *args, **kwargs):
-        # 默认获取当前用户的工作区
-        # 管理员可查看所有工作区
+        """工作区查询"""
         query_params = self.request.query_params
         not_page = query_params.get('not_page', False)
-        personal = query_params.get('personal', True)
+        show_all = query_params.get('show_all', 'false')
         queryset = self.filter_queryset(self.get_queryset())
-        if personal:
+        show_all = True if show_all == 'true' else False
+        if show_all:
+            if request.user.role_level >= ADMIN:
+                queryset = queryset
+            else:
+                queryset = queryset.filter(work_zone_members__user=request.user)
+        else:
             queryset = queryset.filter(work_zone_members__user=request.user)
         queryset = queryset.distinct()
         if not_page and not_page.lower() != 'false':
@@ -108,6 +112,7 @@ class WorkZoneViewSet(viewsets.ModelViewSet):
             return Response(result, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
+        """删除工作区"""
         instance = self.get_object()
         self.perform_destroy(instance)
         action_log(request=request, user=request.user, action_type=DELETE_ACTION_TYPE, old_instance=None,
@@ -117,6 +122,7 @@ class WorkZoneViewSet(viewsets.ModelViewSet):
 
     @action(methods=['post', 'get'], detail=True)
     def members(self, request, *args, **kwargs):
+        """获取/保存工作区成员"""
         instance = self.get_object()
         if request.method == 'GET':
             query_params = self.request.query_params
@@ -189,6 +195,29 @@ class WorkZoneViewSet(viewsets.ModelViewSet):
             return Response(result, status=status.HTTP_200_OK)
         result = {'success': True, 'messages': f'获取成员类型!', 'results': MEMBER_TYPE}
         return Response(result, status=status.HTTP_200_OK)
+
+    @action(methods=['get'], detail=False)
+    def valid(self, request, *args, **kwargs):
+        """验证当前用户是否工作区成员"""
+        query_params = self.request.query_params
+        work_zone_id = query_params.get('work_zone', False)
+        api_logger.debug(f'获取work_zone_id:{work_zone_id}')
+        try:
+            work_zone = WorkZone.objects.get(pk=int(work_zone_id))
+        except:
+            work_zone = None
+        if work_zone:
+            work_zone_member = WorkZoneMember.objects.filter(work_zone=work_zone, user=request.user).first()
+            api_logger.debug(f'获取 work_zone_members:{work_zone_member}')
+            if work_zone_member:
+                result = {'success': True, 'messages': f'当前用户为该工作区成员!', 'results': {}}
+                return Response(result, status=status.HTTP_200_OK)
+            else:
+                result = {'success': False, 'messages': f'当前用户不是该工作区成员!', 'results': {}}
+                return Response(result, status=status.HTTP_200_OK)
+        else:
+            result = {'success': False, 'messages': f'当前工作区获取错误!', 'results': {}}
+            return Response(result, status=status.HTTP_200_OK)
 
     def get_serializer_class(self):
         if self.action == 'create' or self.action == 'update' or self.action == 'partial_update':

@@ -7,6 +7,7 @@ from rest_framework import serializers
 from pictor.models import WorkZone, WorkZoneMember
 from pictor.serializers.user_serializers import UserBaseSerializer
 from pictor.configures import ZONE_ADMIN
+from pictor.utils.permission_heplers import get_work_zone_permission
 
 
 class WorkZoneBaseSerializer(serializers.ModelSerializer):
@@ -26,7 +27,12 @@ class WorkZoneMemberBaseSerializer(serializers.ModelSerializer):
 class WorkZoneListSerializer(serializers.ModelSerializer):
     created_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', read_only=True)
     creator = UserBaseSerializer(read_only=True, label="创建者")
-
+    permissions = serializers.SerializerMethodField(read_only=True)
+    
+    def get_permissions(self, obj):
+        user = self.context['request'].user
+        return get_work_zone_permission(user=user, work_zone=obj)
+        
     class Meta:
         model = WorkZone
         fields = '__all__'

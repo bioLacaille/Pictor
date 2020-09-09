@@ -2,10 +2,18 @@
   <div class="table-container">
     <vab-query-form>
       <vab-query-form-left-panel>
-        <el-button icon="el-icon-plus" type="primary" @click="handleAdd"
+        <el-button
+          v-if="project_permissions.add"
+          icon="el-icon-plus"
+          type="primary"
+          @click="handleAdd"
           >添加
         </el-button>
-        <el-button icon="el-icon-delete" type="danger" @click="handleDelete"
+        <el-button
+          v-if="project_permissions.delete"
+          icon="el-icon-delete"
+          type="danger"
+          @click="handleDelete"
           >删除
         </el-button>
       </vab-query-form-left-panel>
@@ -86,13 +94,22 @@
         fixed="right"
       >
         <template slot-scope="scope">
-          <el-button type="text" @click="handleEdit(scope.row)"
+          <el-button
+            v-if="project_permissions.edit"
+            type="text"
+            @click="handleEdit(scope.row)"
             >编辑
           </el-button>
-          <el-button type="text" @click="handleDelete(scope.row)"
+          <el-button
+            v-if="project_permissions.delete"
+            type="text"
+            @click="handleDelete(scope.row)"
             >删除
           </el-button>
-          <el-button type="text" @click="handleMange(scope.row)"
+          <el-button
+            v-if="project_permissions.manage"
+            type="text"
+            @click="handleMange(scope.row)"
             >管理
           </el-button>
         </template>
@@ -120,6 +137,7 @@ import {
   deleteProject,
   bulkDeleteProject,
 } from "@/api/project";
+import { getActionPermission } from "@/api/actionPermission";
 export default {
   name: "ProjectTable",
   components: {
@@ -135,6 +153,7 @@ export default {
       background: true,
       selectRows: "",
       elementLoadingText: "正在加载...",
+      project_permissions: {},
       queryForm: {
         page: 1,
         page_size: 10,
@@ -144,6 +163,7 @@ export default {
     };
   },
   created() {
+    this.fetchPermission();
     this.fetchData();
   },
   beforeDestroy() {},
@@ -206,6 +226,10 @@ export default {
     handleQuery() {
       this.queryForm.page = 1;
       this.fetchData();
+    },
+    async fetchPermission() {
+      const data = await getActionPermission({ permission_type: "project" });
+      this.project_permissions = data.results.project;
     },
     async fetchData() {
       this.listLoading = true;

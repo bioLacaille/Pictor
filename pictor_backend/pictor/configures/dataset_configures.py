@@ -1,7 +1,7 @@
 """
 Author: Alan Fu
 Email: fualan1990@gmail.com
-数据模块所需配置
+文件数据模块所需配置
 """
 PUBLIC_DATA = 10
 SAMPLE_DATA = 20

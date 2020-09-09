@@ -1,7 +1,8 @@
 """
-操作日志配置
+Author: Alan Fu
+Email: fualan1990@gmail.com
+操作日志模块所需配置
 """
-
 AUTH_ACTION_TYPE = 10
 CREATE_ACTION_TYPE = 100
 UPDATE_ACTION_TYPE = 110

@@ -1,3 +1,8 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+消息通知模块所需配置
+"""
 NOTIFY_INFO = 10
 NOTIFY_URGENT = 20
 NOTIFY_VERY_URGENT = 30

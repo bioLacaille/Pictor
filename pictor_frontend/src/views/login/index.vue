@@ -73,6 +73,8 @@
 
 <script>
 import { isPassword } from "@/utils/validate";
+import { validWorkZoneMember } from "@/api/workzone";
+import store from "@/store";
 
 export default {
   name: "Login",
@@ -128,8 +130,8 @@ export default {
   },
   watch: {
     $route: {
-      handler(route) {
-        this.redirect = (route.query && route.query.redirect) || "/workzones";
+      async handler(route) {
+        this.redirect = (route.query && route.query.redirect) || "/";
       },
       immediate: true,
     },
@@ -148,6 +150,11 @@ export default {
         this.$refs.password.focus();
       });
     },
+    async validUser() {
+      const data = await validWorkZoneMember();
+      const { success, messages, results } = data;
+      return success;
+    },
     handleLogin() {
       this.$refs.loginForm.validate(async (valid) => {
         if (valid) {
@@ -159,7 +166,14 @@ export default {
             this.redirect === "/404" || this.redirect === "/401"
               ? "/"
               : this.redirect;
-          await this.$router.push(routerPath).catch(() => {});
+          const is_valid = await this.validUser();
+          console.log("handleLogin, this.redirect", this.redirect);
+          console.log("handleLogin, is_valid", is_valid);
+          if (is_valid) {
+            await this.$router.push(routerPath).catch(() => {});
+          } else {
+            await this.$router.push("/workzones").catch(() => {});
+          }
           this.loading = false;
         } else {
           return false;

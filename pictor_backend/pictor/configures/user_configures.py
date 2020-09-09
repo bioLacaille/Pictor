@@ -3,10 +3,10 @@ Author: Alan Fu
 Email: fualan1990@gmail.com
 用户模块所需配置
 """
-USER = 10  # 通用权限
-SUPER_USER = 20  # 通用权限+设置权限
-ADMIN = 30  # 通用权限+设置权限+管理权限
-SUPER_ADMIN = 40  # TODO 后期开发运维系统, 该等级用户可以使用运维系统
+USER = 10  # 业务菜单权限
+SUPER_USER = 20  # 业务菜单权限+设置权限
+ADMIN = 30  # 业务菜单权限+设置权限+管理权限
+SUPER_ADMIN = 40  # 业务菜单权限+设置权限+管理权限+后期开发运维功能
 
 ROLE_TYPE = {
     USER: 'user',

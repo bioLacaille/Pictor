@@ -2,10 +2,18 @@
   <div class="table-container">
     <vab-query-form>
       <vab-query-form-left-panel>
-        <el-button icon="el-icon-plus" type="primary" @click="handleAdd"
+        <el-button
+          v-if="sample_permissions.add"
+          icon="el-icon-plus"
+          type="primary"
+          @click="handleAdd"
           >添加
         </el-button>
-        <el-button icon="el-icon-delete" type="danger" @click="handleDelete"
+        <el-button
+          v-if="sample_permissions.delete"
+          icon="el-icon-delete"
+          type="danger"
+          @click="handleDelete"
           >删除
         </el-button>
       </vab-query-form-left-panel>
@@ -118,13 +126,22 @@
         fixed="right"
       >
         <template slot-scope="scope">
-          <el-button type="text" @click="handleEdit(scope.row)"
+          <el-button
+            v-if="sample_permissions.edit"
+            type="text"
+            @click="handleEdit(scope.row)"
             >编辑
           </el-button>
-          <el-button type="text" @click="handleDelete(scope.row)"
+          <el-button
+            v-if="sample_permissions.delete"
+            type="text"
+            @click="handleDelete(scope.row)"
             >删除
           </el-button>
-          <el-button type="text" @click="handleSelectData(scope.row)"
+          <el-button
+            v-if="sample_permissions.related"
+            type="text"
+            @click="handleSelectData(scope.row)"
             >关联数据
           </el-button>
         </template>
@@ -148,6 +165,7 @@
 import SampleEdit from "./components/SampleEdit";
 import SelectDataset from "./components/SelectDataset";
 import { getSampleList, deleteSample, bulkDeleteSample } from "@/api/sample";
+import { getActionPermission } from "@/api/actionPermission";
 
 export default {
   name: "SampleTable",
@@ -164,6 +182,7 @@ export default {
       background: true,
       selectRows: "",
       elementLoadingText: "正在加载...",
+      sample_permissions: {},
       queryForm: {
         page: 1,
         page_size: 10,
@@ -173,6 +192,7 @@ export default {
     };
   },
   created() {
+    this.fetchPermission();
     this.fetchData();
   },
   beforeDestroy() {},
@@ -235,6 +255,10 @@ export default {
     handleQuery() {
       this.queryForm.page = 1;
       this.fetchData();
+    },
+    async fetchPermission() {
+      const data = await getActionPermission({ permission_type: "sample" });
+      this.sample_permissions = data.results.sample;
     },
     async fetchData() {
       this.listLoading = true;

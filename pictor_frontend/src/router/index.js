@@ -63,6 +63,11 @@ export const asyncRoutes = [
     path: "/charts",
     component: Layout,
     redirect: "charts",
+    meta: {
+      title: "统计图表",
+      icon: "chart-pie",
+      permissions: ["admin", "super_admin"],
+    },
     children: [
       {
         path: "",
@@ -81,6 +86,11 @@ export const asyncRoutes = [
     path: "/monitor",
     component: Layout,
     redirect: "monitor",
+    meta: {
+      title: "实时监控",
+      icon: "archive",
+      permissions: ["admin", "super_admin"],
+    },
     children: [
       {
         path: "",
@@ -167,7 +177,6 @@ export const asyncRoutes = [
     meta: {
       title: "设置",
       icon: "wallet",
-      permissions: ["super_user", "admin", "super_admin"],
     },
     children: [
       {
@@ -177,7 +186,6 @@ export const asyncRoutes = [
         component: () => import("@/views/serialNumberSetting/index"),
         meta: {
           title: "上传规则设置(todo)",
-          permissions: ["super_user", "admin", "super_admin"],
         },
       },
       {

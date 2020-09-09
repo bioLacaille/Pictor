@@ -1,3 +1,15 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+样本API接口
+1.新增样本
+2.编辑样本
+3.获取样本详情
+4.样本查询
+5.删除/批量删除样本
+6.关联文件数据
+7.已关联文件数据
+"""
 from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions
 from rest_framework.response import Response
@@ -10,7 +22,6 @@ from pictor.configures import CREATE_ACTION_TYPE, UPDATE_ACTION_TYPE, DELETE_ACT
 from pictor.utils.dataset_helpers import get_data_files
 from pictor.serializers.sample_serializers import SampleListSerializer, SampleDetailSerializer, SampleActionSerializer
 from pictor.serializers.dataset_serializers import DataSetListSerializer
-from pictor.utils.auth_helpers import IsWorkZoneAdmin, IsWorkZoneMaintainer, IsWorkZoneUser
 
 
 class SampleViewSet(viewsets.ModelViewSet):
@@ -19,13 +30,7 @@ class SampleViewSet(viewsets.ModelViewSet):
     search_fields = ('serial_number', 'sample_name', 'sample_type', 'sample_source',)
     ordering_fields = ('serial_number', 'sample_name', 'sample_type', 'sample_source',)
     queryset = Sample.objects.order_by('-id').all()
-
-    def get_permissions(self):
-        if self.action == 'update' or self.action == 'partial_update':
-            return [permissions.IsAuthenticated(), IsWorkZoneUser()]
-        if self.action == 'destroy':
-            return [permissions.IsAuthenticated(), IsWorkZoneMaintainer()]
-        return [permissions.IsAuthenticated(), ]
+    permission_classes = (permissions.IsAuthenticated, )
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

@@ -10,3 +10,4 @@ from pictor.api.data_set_apis import *
 from pictor.api.setting_apis import *
 from pictor.api.statistics_api import *
 from pictor.api.manage import *
+from pictor.api.permission_apis import *

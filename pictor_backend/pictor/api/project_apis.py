@@ -3,10 +3,11 @@ Author: Alan Fu
 Email: fualan1990@gmail.com
 项目API接口
 1.新增项目
-2.修改项目信息
-3.项目列表
-4.删除项目
-5.批量删除项目
+2.编辑项目
+3.获取项目详情
+4.项目查询
+5.删除/批量删除项目
+6.项目统计信息
 """
 from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions
@@ -18,7 +19,6 @@ from pictor.utils.actionlog_helpers import action_log
 from pictor.configures import CREATE_ACTION_TYPE, UPDATE_ACTION_TYPE, DELETE_ACTION_TYPE, BULK_DELETE_ACTION_TYPE, \
     ANALYSIS_SUCCESS
 from pictor.serializers.project_serializers import ProjectActionSerializer, ProjectDetailSerializer
-from pictor.utils.auth_helpers import IsWorkZoneAdmin, IsWorkZoneMaintainer, IsWorkZoneUser
 from datetime import datetime
 from django.db.models import Count
 from pictor.utils.analysis_helpers import task_avg_time
@@ -27,18 +27,13 @@ from pictor.utils.analysis_helpers import task_avg_time
 class ProjectViewSet(viewsets.ModelViewSet):
     """项目"""
     filter_backends = (filters.OrderingFilter, filters.SearchFilter,)
-    search_fields = ('name', 'work_zone__name', 'serial_number')
+    search_fields = ('name', 'serial_number')
     ordering_fields = ('work_zone__name', 'serial_number', 'name', 'remark', 'created_time')
     queryset = Project.objects.order_by('-id').all()
-
-    def get_permissions(self):
-        if self.action == 'update' or self.action == 'partial_update':
-            return [permissions.IsAuthenticated(), IsWorkZoneUser()]
-        if self.action == 'destroy':
-            return [permissions.IsAuthenticated(), IsWorkZoneMaintainer()]
-        return [permissions.IsAuthenticated(), ]
+    permission_classes = (permissions.IsAuthenticated, )
 
     def create(self, request, *args, **kwargs):
+        """新增项目"""
         serializer = self.get_serializer(data=request.data)
         serial_number = request.data.get('serial_number', '')
         if Project.objects.filter(serial_number=serial_number).first():
@@ -54,13 +49,14 @@ class ProjectViewSet(viewsets.ModelViewSet):
         return Response(result, status=status.HTTP_200_OK, headers=headers)
 
     def retrieve(self, request, *args, **kwargs):
+        """获取项目详情"""
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         result = {'success': True, 'messages': f'获取项目信息:{instance.__str__()}!', 'results': serializer.data}
         return Response(result, status=status.HTTP_200_OK)
 
     def update(self, request, *args, **kwargs):
-        # 项目编号不能修改
+        """编辑项目"""
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
         old_instance = self.get_object()
@@ -80,10 +76,12 @@ class ProjectViewSet(viewsets.ModelViewSet):
         return Response(result, status=status.HTTP_200_OK)
 
     def partial_update(self, request, *args, **kwargs):
+        """编辑项目"""
         kwargs['partial'] = True
         return self.update(request, *args, **kwargs)
 
     def list(self, request, *args, **kwargs):
+        """项目查询"""
         query_params = self.request.query_params
         not_page = query_params.get('not_page', False)
         work_zone_id = query_params.get('work_zone', False)
@@ -110,6 +108,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
             return Response(result, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
+        """删除项目"""
         instance = self.get_object()
         self.perform_destroy(instance)
         action_log(request=request, user=request.user, action_type=DELETE_ACTION_TYPE, old_instance=None,
@@ -119,6 +118,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     @action(methods=['post', 'delete'], detail=False)
     def bulk_delete(self, request, *args, **kwargs):
+        """批量删除项目"""
         # 批量删除
         deleted_objects_ids = request.data.get('deleted_objects', [])
         queryset = self.get_queryset()
@@ -132,6 +132,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
     @action(methods=['get'], detail=True)
     def statistics(self, request, *args, **kwargs):
+        """项目统计信息"""
         instance = self.get_object()
         sample_queryset = Sample.objects.filter(project=instance)
         analysis_queryset = Analysis.objects.filter(project=instance)

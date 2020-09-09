@@ -11,6 +11,42 @@
           >工作区----请先选择或创建你的工作区, 并将相关用户添加进该工作区,
           工作区内成员将共享该工作区数据</el-divider
         >
+        <div style="float: right; display: flex; margin-left: 10px;">
+          <el-radio-group
+            v-if="is_admin"
+            v-model="queryForm.show_all"
+            style="padding-left: 10px;"
+            @change="handleChangeShow"
+          >
+            <el-radio-button :key="true" :label="true">全 部</el-radio-button>
+            <el-radio-button :key="false" :label="false"
+              >与自己相关</el-radio-button
+            >
+          </el-radio-group>
+          <el-form
+            ref="form"
+            style="padding-left: 20px;"
+            :model="queryForm"
+            :inline="true"
+            @submit.native.prevent
+          >
+            <el-form-item>
+              <el-input
+                v-model="queryForm.search"
+                placeholder="工作区编号/工作区名称"
+              />
+            </el-form-item>
+            <el-form-item>
+              <el-button
+                icon="el-icon-search"
+                type="primary"
+                native-type="submit"
+                @click="handleQuery"
+                >查询
+              </el-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </el-col>
       <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="6">
         <el-card shadow="hover" style="text-align: center; height: 380px;">
@@ -83,13 +119,25 @@
             <el-button type="primary" plain @click="handleSelect(item)"
               >进入</el-button
             >
-            <el-button type="success" plain @click="handleEdit(item)"
-              >修改</el-button
+            <el-button
+              v-if="item.permissions.edit"
+              type="success"
+              plain
+              @click="handleEdit(item)"
+              >编辑</el-button
             >
-            <el-button type="info" plain @click="handleSelectUser(item)"
+            <el-button
+              v-if="item.permissions.change_member"
+              type="info"
+              plain
+              @click="handleSelectUser(item)"
               >成员</el-button
             >
-            <el-button type="danger" plain @click="handleDelete(item)"
+            <el-button
+              v-if="item.permissions.delete"
+              type="danger"
+              plain
+              @click="handleDelete(item)"
               >删除</el-button
             >
           </div>
@@ -98,9 +146,9 @@
     </el-row>
     <el-pagination
       :background="background"
-      :current-page="page"
+      :current-page="queryForm.page"
       :layout="layout"
-      :page-size="page_size"
+      :page-size="queryForm.page_size"
       :total="all_count"
       @current-change="handleCurrentChange"
       @size-change="handleSizeChange"
@@ -127,15 +175,25 @@ export default {
     return {
       list: null,
       listLoading: true,
-      page: 1,
-      page_size: 10,
       layout: "total, sizes, prev, pager, next, jumper",
       all_count: 0,
+      queryForm: {
+        show_all: false,
+        search: "",
+        page: 1,
+        page_size: 10,
+      },
       background: true,
       dialogFormVisible: false,
+      is_admin: false,
     };
   },
   created() {
+    const permissions = store.getters["user/permissions"];
+    if (permissions.includes("admin") || permissions.includes("super_admin")) {
+      this.is_admin = true;
+    }
+    console.log("is_admin", this.is_admin);
     this.fetchData();
   },
   methods: {
@@ -175,12 +233,17 @@ export default {
         }
       );
     },
+    handleQuery() {
+      this.queryForm.page = 1;
+      this.fetchData();
+    },
+    handleChangeShow(val) {
+      this.queryForm.show_all = val;
+      this.fetchData();
+    },
     async fetchData() {
       this.listLoading = true;
-      const data = await getWorkZoneList({
-        page: this.page,
-        page_size: this.page_size,
-      });
+      const data = await getWorkZoneList(this.queryForm);
       this.list = data.results;
       this.all_count = data.all_count;
       setTimeout(() => {

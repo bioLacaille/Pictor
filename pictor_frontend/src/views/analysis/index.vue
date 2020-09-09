@@ -144,7 +144,6 @@
                 <el-dropdown-item @click.native="handleReset(scope.row)"
                   >重置</el-dropdown-item
                 >
-                <el-dropdown-item>克隆(todo)</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </template>
