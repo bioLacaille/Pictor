@@ -1,24 +1,25 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+文件数据API接口
+"""
 from rest_framework import mixins, viewsets, filters
 from rest_framework import permissions
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from pictor.configures.dataset_configures import *
-from django.conf import settings
 import os
 import shutil
-import glob
 from pictor.utils.base_heplers import create_or_get_directory
 from pictor.models import WorkZone, DataSet
 from pictor.utils.dataset_helpers import get_data_directory_path, get_data_files, check_md5_sum
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
-from django.db import transaction
 from pictor.serializers.dataset_serializers import DataSetListSerializer, DataSetDetailSerializer, \
     DataSetActionSerializer
 from pictor.utils.applog_helpers import api_logger
 from pictor.utils.actionlog_helpers import action_log
-from pictor.tasks import copy_move_dataset_task
 
 
 class DataSetViewSet(viewsets.ModelViewSet):

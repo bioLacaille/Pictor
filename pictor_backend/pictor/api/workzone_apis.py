@@ -2,14 +2,6 @@
 Author: Alan Fu
 Email: fualan1990@gmail.com
 工作区API接口
-1.新增工作区
-2.编辑工作区信息
-3.获取工作区详情
-4.工作区查询
-5.获取/调整工作区成员
-6.删除工作区
-7.工作区成员类型
-8.验证当前用户是否工作区成员
 """
 from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions

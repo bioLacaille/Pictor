@@ -4,7 +4,6 @@ from pictor.models.dataset_models import *
 from pictor.models.manage_models import *
 from pictor.models.project_models import *
 from pictor.models.sample_models import *
-from pictor.models.sequencing_models import *
 from pictor.models.setting_models import *
 from pictor.models.statistics_models import *
 from pictor.models.workzone_models import *

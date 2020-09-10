@@ -44,6 +44,7 @@
       </el-form>
       <!-- 标准列表 -->
       <el-button
+        v-if="analysis_permissions.add"
         class="dk-btn-block is-ghost"
         size="medium"
         plain
@@ -126,22 +127,34 @@
                 >更多<i class="el-icon-arrow-down el-icon--right"></i
               ></el-button>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item @click.native="handleEditAnalysis(scope.row)"
+                <el-dropdown-item
+                  v-if="analysis_permissions.edit"
+                  @click.native="handleEditAnalysis(scope.row)"
                   >编辑</el-dropdown-item
                 >
-                <el-dropdown-item @click.native="handleDelete(scope.row)"
+                <el-dropdown-item
+                  v-if="analysis_permissions.delete"
+                  @click.native="handleDelete(scope.row)"
                   >删除</el-dropdown-item
                 >
-                <el-dropdown-item @click.native="handleStart(scope.row)"
+                <el-dropdown-item
+                  v-if="analysis_permissions.start"
+                  @click.native="handleStart(scope.row)"
                   >启动</el-dropdown-item
                 >
-                <el-dropdown-item @click.native="handleStop(scope.row)"
+                <el-dropdown-item
+                  v-if="analysis_permissions.stop"
+                  @click.native="handleStop(scope.row)"
                   >停止</el-dropdown-item
                 >
-                <el-dropdown-item @click.native="handleContinueRun(scope.row)"
+                <el-dropdown-item
+                  v-if="analysis_permissions.continue"
+                  @click.native="handleContinueRun(scope.row)"
                   >继续运行</el-dropdown-item
                 >
-                <el-dropdown-item @click.native="handleReset(scope.row)"
+                <el-dropdown-item
+                  v-if="analysis_permissions.reset"
+                  @click.native="handleReset(scope.row)"
                   >重置</el-dropdown-item
                 >
               </el-dropdown-menu>
@@ -184,6 +197,7 @@ import {
 } from "@/api/analysis";
 import AddAnalysis from "./components/AddAnalysis";
 import ShowAnalysis from "./components/ShowAnalysis";
+import { getActionPermission } from "@/api/actionPermission";
 export default {
   name: "Analysis",
   components: {
@@ -203,6 +217,7 @@ export default {
       listData: [],
       layout: "total, sizes, prev, pager, next, jumper",
       all_count: 0,
+      analysis_permissions: {},
       queryForm: {
         page: 1,
         page_size: 10,
@@ -213,6 +228,7 @@ export default {
     };
   },
   created() {
+    this.fetchPermission();
     this.fetchAnalysisStatus();
     this.fetchAnalysisStatistics();
     this.fetchData();
@@ -339,6 +355,10 @@ export default {
       setTimeout(() => {
         this.listLoading = false;
       }, 300);
+    },
+    async fetchPermission() {
+      const data = await getActionPermission({ permission_type: "analysis" });
+      this.analysis_permissions = data.results.analysis;
     },
     /**
      * @return {string}

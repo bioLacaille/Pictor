@@ -1,3 +1,8 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+分析模块API接口
+"""
 from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions
 from rest_framework.response import Response

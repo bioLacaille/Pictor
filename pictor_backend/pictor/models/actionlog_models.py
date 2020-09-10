@@ -1,3 +1,8 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+操作日志数据模型
+"""
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models

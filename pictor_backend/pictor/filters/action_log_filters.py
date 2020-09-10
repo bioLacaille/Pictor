@@ -1,3 +1,8 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+自定义操作日志筛选
+"""
 from pictor.filters.base_filters import BaseParameterFilter
 from django.db import models
 from functools import reduce

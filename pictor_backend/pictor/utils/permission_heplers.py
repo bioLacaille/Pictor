@@ -84,6 +84,7 @@ def get_sample_permission(user, work_zone=None):
         if work_zone_member and work_zone_member.level == ZONE_MAINTAINER:
             perm['add'] = True
             perm['edit'] = True
+            perm['delete'] = True
         if work_zone_member and work_zone_member.level == ZONE_ADMIN:
             for key, value in perm.items():
                 perm[key] = True
@@ -106,6 +107,7 @@ def get_dataset_permission(user, work_zone=None):
         if work_zone_member and work_zone_member.level == ZONE_MAINTAINER:
             perm['upload'] = True
             perm['create_directory'] = True
+            perm['delete'] = True
             perm['download'] = True
             perm['rename'] = True
             perm['copy'] = True
@@ -120,7 +122,7 @@ def get_analysis_permission(user, work_zone=None):
     """
     获取分析任务的操作权限,
     """
-    perm = DATASET_PERMISSION.copy()
+    perm = ANALYSIS_PERMISSION.copy()
     if user.role_level >= ADMIN:
         for key, value in perm.items():
             perm[key] = True
@@ -132,10 +134,35 @@ def get_analysis_permission(user, work_zone=None):
         if work_zone_member and work_zone_member.level == ZONE_MAINTAINER:
             perm['add'] = True
             perm['edit'] = True
+            perm['delete'] = True
             perm['start'] = True
             perm['stop'] = True
             perm['continue'] = True
             perm['reset'] = True
+        if work_zone_member and work_zone_member.level == ZONE_ADMIN:
+            for key, value in perm.items():
+                perm[key] = True
+    return perm
+
+
+def get_num_set_permission(user, work_zone=None):
+    """
+    获取编号设置的操作权限,
+    """
+    perm = NUMBER_SETTING_PERMISSION.copy()
+    if user.role_level >= ADMIN:
+        for key, value in perm.items():
+            perm[key] = True
+    elif work_zone:
+        work_zone_member = WorkZoneMember.objects.filter(work_zone=work_zone, user=user).first()
+        if work_zone_member and work_zone_member.level == ZONE_USER:
+            perm['add'] = True
+            perm['edit'] = True
+        if work_zone_member and work_zone_member.level == ZONE_MAINTAINER:
+            perm['add'] = True
+            perm['edit'] = True
+            perm['delete'] = True
+            perm['active'] = True
         if work_zone_member and work_zone_member.level == ZONE_ADMIN:
             for key, value in perm.items():
                 perm[key] = True

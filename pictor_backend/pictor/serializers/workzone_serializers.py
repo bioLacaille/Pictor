@@ -1,8 +1,3 @@
-"""
-Author: Alan Fu
-Email: fualan1990@gmail.com
-工作区数据序列化
-"""
 from rest_framework import serializers
 from pictor.models import WorkZone, WorkZoneMember
 from pictor.serializers.user_serializers import UserBaseSerializer

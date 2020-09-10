@@ -14,7 +14,7 @@ export default {
   methods: {
     getForFileList() {
       console.log("getForFileList router", this.$route.path);
-      if (this.$route.path === "/dataset/dataset") {
+      if (this.$route.path === "/dataset") {
         this.$baseEventBus.$emit("reloadRouterView");
       }
     },

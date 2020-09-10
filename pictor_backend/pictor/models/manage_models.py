@@ -8,42 +8,6 @@ from django.utils import timezone
 from pictor.configures import NOTIFY_INFO, NOTIFY_URGENT, NOTIFY_VERY_URGENT, NOTIFY_WARNING, NOTIFY_ERROR, NOTIFY_LEVEL
 
 
-class SequencingTaskInterfaceManager(models.Manager):
-
-    def get_active(self):
-        return self.filter(is_active=True)
-
-
-class SequencingTaskInterface(models.Model):
-    name = models.CharField(max_length=255, verbose_name='接口名称')
-    domain = models.CharField(max_length=255, verbose_name='接口域名')
-    success_code = models.CharField(max_length=255, verbose_name='成功返回码')
-    error_code = models.CharField(max_length=255, verbose_name='失败返回码')
-    start_uri = models.CharField(max_length=255, verbose_name='启动任务URI')
-    stop_uri = models.CharField(max_length=255, verbose_name='停止任务URI')
-    reset_uri = models.CharField(max_length=255, verbose_name='重置任务URI')
-    status_uri = models.CharField(max_length=255, verbose_name='查询任务状态URI')
-    result_uri = models.CharField(max_length=255, verbose_name='获取任务结果URI')
-    log_uri = models.CharField(max_length=255, verbose_name='获取运行日志URI')
-    is_active = models.BooleanField(default=False, verbose_name='是否启用该配置')
-    remark = models.TextField(null=True, blank=True, verbose_name='备注/描述')
-    created_time = models.DateTimeField(default=timezone.now, verbose_name='创建日期')
-
-    class Meta:
-        verbose_name = '拆分任务接口'
-        verbose_name_plural = '拆分任务接口'
-
-    def save(self, *args, **kwargs):
-        super(SequencingTaskInterface, self).save(*args, **kwargs)
-        if self.is_active:
-            SequencingTaskInterface.objects.exclude(id=self.id).update(is_active=False)
-
-    def __str__(self):
-        return self.name
-
-    objects = SequencingTaskInterfaceManager()
-
-
 class AnalysisTaskInterfaceManager(models.Manager):
 
     def get_active(self):

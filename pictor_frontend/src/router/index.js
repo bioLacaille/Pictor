@@ -177,6 +177,7 @@ export const asyncRoutes = [
     meta: {
       title: "设置",
       icon: "wallet",
+      permissions: ["super_user", "admin", "super_admin"],
     },
     children: [
       {
@@ -186,12 +187,14 @@ export const asyncRoutes = [
         component: () => import("@/views/serialNumberSetting/index"),
         meta: {
           title: "上传规则设置(todo)",
+          permissions: ["super_user", "admin", "super_admin"],
         },
       },
       {
         path: "serialNumSetting",
         name: "serialNumSetting",
         icon: "wallet",
+        permissions: ["super_user", "admin", "super_admin"],
         component: () => import("@/views/serialNumberSetting/index"),
         meta: { title: "编号规则设置" },
       },

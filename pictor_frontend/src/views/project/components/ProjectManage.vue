@@ -171,10 +171,14 @@
               fixed="right"
             >
               <template slot-scope="scope">
-                <el-button type="text" @click="handleSampleEdit(scope.row)"
+                <el-button
+                  v-if="sample_permissions.edit"
+                  type="text"
+                  @click="handleSampleEdit(scope.row)"
                   >编辑
                 </el-button>
                 <el-button
+                  v-if="sample_permissions.related"
                   type="text"
                   @click="handleSampleSelectData(scope.row)"
                   >关联数据
@@ -311,26 +315,35 @@
                     ></el-button>
                     <el-dropdown-menu slot="dropdown">
                       <el-dropdown-item
+                        v-if="analysis_permissions.edit"
                         @click.native="handleEditAnalysis(scope.row)"
                         >编辑</el-dropdown-item
                       >
-                      <el-dropdown-item @click.native="handleDelete(scope.row)"
+                      <el-dropdown-item
+                        v-if="analysis_permissions.delete"
+                        @click.native="handleDelete(scope.row)"
                         >删除</el-dropdown-item
                       >
-                      <el-dropdown-item @click.native="handleStart(scope.row)"
+                      <el-dropdown-item
+                        v-if="analysis_permissions.start"
+                        @click.native="handleStart(scope.row)"
                         >启动</el-dropdown-item
                       >
-                      <el-dropdown-item @click.native="handleStop(scope.row)"
+                      <el-dropdown-item
+                        v-if="analysis_permissions.stop"
+                        @click.native="handleStop(scope.row)"
                         >停止</el-dropdown-item
                       >
                       <el-dropdown-item
+                        v-if="analysis_permissions.continue"
                         @click.native="handleContinueRun(scope.row)"
                         >继续运行</el-dropdown-item
                       >
-                      <el-dropdown-item @click.native="handleReset(scope.row)"
+                      <el-dropdown-item
+                        v-if="analysis_permissions.reset"
+                        @click.native="handleReset(scope.row)"
                         >重置</el-dropdown-item
                       >
-                      <el-dropdown-item>克隆(todo)</el-dropdown-item>
                     </el-dropdown-menu>
                   </el-dropdown>
                 </template>
@@ -409,6 +422,7 @@ import {
   continueRunAnalysis,
   resetAnalysis,
 } from "@/api/analysis";
+import { getActionPermission } from "@/api/actionPermission";
 
 export default {
   name: "ProjectManage",
@@ -478,12 +492,23 @@ export default {
         dataType: 10,
         currentPath: "",
       },
+      sample_permissions: {},
+      analysis_permissions: {},
     };
   },
   created() {
+    this.fetchPermission();
     this.fetchAnalysisStatus();
   },
   methods: {
+    async fetchPermission() {
+      const data = await getActionPermission({ permission_type: "sample" });
+      const analysis_data = await getActionPermission({
+        permission_type: "analysis",
+      });
+      this.sample_permissions = data.results.sample;
+      this.analysis_permissions = analysis_data.results.analysis;
+    },
     showMange(row) {
       this.project = row;
       this.sample_query_form.project = row.id;

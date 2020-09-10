@@ -1,3 +1,8 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+站内消息数据模型
+"""
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models

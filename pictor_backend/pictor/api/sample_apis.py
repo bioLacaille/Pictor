@@ -2,13 +2,6 @@
 Author: Alan Fu
 Email: fualan1990@gmail.com
 样本API接口
-1.新增样本
-2.编辑样本
-3.获取样本详情
-4.样本查询
-5.删除/批量删除样本
-6.关联文件数据
-7.已关联文件数据
 """
 from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions

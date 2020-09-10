@@ -44,6 +44,13 @@ ANALYSIS_PERMISSION = {
     'reset': False,  # 重置
 }
 
+NUMBER_SETTING_PERMISSION = {
+    'add': False,  # 新增
+    'edit': False,  # 修改
+    'delete': False,  # 删除
+    'active': False,  # 启用/禁用
+}
+
 ACTION_PERMISSION = {
     'work_zone': WORK_ZONE_PERMISSION,
     'project': PROJECT_PERMISSION,

@@ -1,3 +1,8 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+操作权限API接口
+"""
 from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions
 from rest_framework.response import Response
@@ -5,7 +10,7 @@ from rest_framework.decorators import action
 from pictor.models import WorkZone
 from pictor.configures.permission_configures import *
 from pictor.utils.permission_heplers import get_work_zone_permission, get_project_permission, get_sample_permission, \
-    get_analysis_permission
+    get_analysis_permission, get_dataset_permission, get_num_set_permission
 
 
 class PermissionViewSet(viewsets.ViewSet):
@@ -35,13 +40,17 @@ class PermissionViewSet(viewsets.ViewSet):
             result = {'success': True, 'messages': f'获取:{permission_type}的权限',
                       'results': {permission_type: sample_permission}}
         elif permission_type == 'dataset':
-            sample_permission = get_sample_permission(user=request.user, work_zone=work_zone)
+            dataset_permission = get_dataset_permission(user=request.user, work_zone=work_zone)
             result = {'success': True, 'messages': f'获取:{permission_type}的权限',
-                      'results': {permission_type: sample_permission}}
+                      'results': {permission_type: dataset_permission}}
         elif permission_type == 'analysis':
-            sample_permission = get_analysis_permission(user=request.user, work_zone=work_zone)
+            analysis_permission = get_analysis_permission(user=request.user, work_zone=work_zone)
             result = {'success': True, 'messages': f'获取:{permission_type}的权限',
-                      'results': {permission_type: sample_permission}}
+                      'results': {permission_type: analysis_permission}}
+        elif permission_type == 'setting':
+            setting_permission = get_num_set_permission(user=request.user, work_zone=work_zone)
+            result = {'success': True, 'messages': f'获取:{permission_type}的权限',
+                      'results': {permission_type: setting_permission}}
         else:
             result = {'success': True, 'messages': '尚未指定查询类型, 返回默认权限', 'results': ACTION_PERMISSION}
         return Response(result, status=status.HTTP_200_OK)

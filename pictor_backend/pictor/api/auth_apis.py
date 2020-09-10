@@ -1,3 +1,8 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+认证API接口
+"""
 from rest_framework_jwt.views import JSONWebTokenAPIView
 from rest_framework import status
 from rest_framework_jwt.serializers import JSONWebTokenSerializer

@@ -5,6 +5,7 @@
         <vab-query-form>
           <vab-query-form-left-panel>
             <el-button
+              v-if="setting_permissions.add"
               icon="el-icon-plus"
               type="primary"
               @click="handleProjectAdd"
@@ -99,20 +100,26 @@
             fixed="right"
           >
             <template slot-scope="scope">
-              <el-button type="text" @click="handleProjectEdit(scope.row)"
+              <el-button
+                v-if="setting_permissions.edit"
+                type="text"
+                @click="handleProjectEdit(scope.row)"
                 >编辑
               </el-button>
-              <el-button type="text" @click="handleProjectDelete(scope.row)"
+              <el-button
+                v-if="setting_permissions.delete"
+                type="text"
+                @click="handleProjectDelete(scope.row)"
                 >删除
               </el-button>
               <el-button
-                v-if="scope.row.is_active"
+                v-if="scope.row.is_active && setting_permissions.active"
                 type="text"
                 @click="handleProjectActivation(scope.row, false)"
                 >禁用
               </el-button>
               <el-button
-                v-else
+                v-if="setting_permissions.active && !scope.row.is_active"
                 type="text"
                 @click="handleProjectActivation(scope.row, true)"
                 >启用
@@ -138,6 +145,7 @@
         <vab-query-form>
           <vab-query-form-left-panel>
             <el-button
+              v-if="setting_permissions.add"
               icon="el-icon-plus"
               type="primary"
               @click="handleSampleAdd"
@@ -232,20 +240,26 @@
             fixed="right"
           >
             <template slot-scope="scope">
-              <el-button type="text" @click="handleSampleEdit(scope.row)"
+              <el-button
+                v-if="setting_permissions.edit"
+                type="text"
+                @click="handleSampleEdit(scope.row)"
                 >编辑
               </el-button>
-              <el-button type="text" @click="handleSampleDelete(scope.row)"
+              <el-button
+                v-if="setting_permissions.delete"
+                type="text"
+                @click="handleSampleDelete(scope.row)"
                 >删除
               </el-button>
               <el-button
-                v-if="scope.row.is_active"
+                v-if="setting_permissions.active && scope.row.is_active"
                 type="text"
                 @click="handleSampleActivation(scope.row, false)"
                 >禁用
               </el-button>
               <el-button
-                v-else
+                v-if="setting_permissions.active && !scope.row.is_active"
                 type="text"
                 @click="handleSampleActivation(scope.row, true)"
                 >启用
@@ -271,6 +285,7 @@
         <vab-query-form>
           <vab-query-form-left-panel>
             <el-button
+              v-if="setting_permissions.add"
               icon="el-icon-plus"
               type="primary"
               @click="handleAnalysisAdd"
@@ -365,20 +380,26 @@
             fixed="right"
           >
             <template slot-scope="scope">
-              <el-button type="text" @click="handleAnalysisEdit(scope.row)"
+              <el-button
+                v-if="setting_permissions.edit"
+                type="text"
+                @click="handleAnalysisEdit(scope.row)"
                 >编辑
               </el-button>
-              <el-button type="text" @click="handleAnalysisDelete(scope.row)"
+              <el-button
+                v-if="setting_permissions.delete"
+                type="text"
+                @click="handleAnalysisDelete(scope.row)"
                 >删除
               </el-button>
               <el-button
-                v-if="scope.row.is_active"
+                v-if="setting_permissions.active && scope.row.is_active"
                 type="text"
                 @click="handleAnalysisActivation(scope.row, false)"
                 >禁用
               </el-button>
               <el-button
-                v-else
+                v-if="setting_permissions.active && !scope.row.is_active"
                 type="text"
                 @click="handleAnalysisActivation(scope.row, true)"
                 >启用
@@ -426,6 +447,7 @@ import {
   bulkDeleteSequencingSerialNumberSetting,
   activationSequencingSerialNumberSetting,
 } from "@/api/serialNumberSetting";
+import { getActionPermission } from "@/api/actionPermission";
 export default {
   name: "ProjectTable",
   components: {
@@ -476,14 +498,20 @@ export default {
         search: "",
         ordering: null,
       },
+      setting_permissions: {},
     };
   },
   created() {
+    this.fetchPermission();
     this.fetchProjectData();
   },
   beforeDestroy() {},
   mounted() {},
   methods: {
+    async fetchPermission() {
+      const data = await getActionPermission({ permission_type: "setting" });
+      this.setting_permissions = data.results.setting;
+    },
     isActiveFilter(is_active) {
       if (is_active === true) {
         return "是";

@@ -111,6 +111,7 @@ export default {
   created() {},
   methods: {
     getForFileList() {
+      console.log("getForFileList222222222222222222222");
       this.$emit("getFileList");
     },
     changeForShowList(show_list) {

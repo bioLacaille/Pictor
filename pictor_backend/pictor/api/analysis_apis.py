@@ -2,18 +2,6 @@
 Author: Alan Fu
 Email: fualan1990@gmail.com
 分析任务API接口
-1.新增分析任务
-2.编辑分析任务信息
-3.获取分析任务详情
-4.分析任务查询
-5.删除分析任务
-6.分析任务统计信息
-7.启动分析任务
-8.停止分析任务
-9.继续运行分析任务
-10.重置分析任务
-11.分析任务结果
-12.分析运行日志
 """
 from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions

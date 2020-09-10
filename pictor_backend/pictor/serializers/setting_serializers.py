@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from pictor.models import AnalysisSerialNumberSetting, ProjectSerialNumberSetting, SampleSerialNumberSetting, \
-    SequencingSerialNumberSetting
+from pictor.models import AnalysisSerialNumberSetting, ProjectSerialNumberSetting, SampleSerialNumberSetting
 from pictor.serializers.workzone_serializers import WorkZoneBaseSerializer
 
 
@@ -25,12 +24,4 @@ class SampleSerialNumberSettingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SampleSerialNumberSetting
-        fields = '__all__'
-
-
-class SequencingSerialNumberSettingSerializer(serializers.ModelSerializer):
-    created_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', read_only=True, label='创建时间')
-
-    class Meta:
-        model = SequencingSerialNumberSetting
         fields = '__all__'

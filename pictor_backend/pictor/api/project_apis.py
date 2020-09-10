@@ -2,12 +2,6 @@
 Author: Alan Fu
 Email: fualan1990@gmail.com
 项目API接口
-1.新增项目
-2.编辑项目
-3.获取项目详情
-4.项目查询
-5.删除/批量删除项目
-6.项目统计信息
 """
 from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions
@@ -134,8 +128,14 @@ class ProjectViewSet(viewsets.ModelViewSet):
     def statistics(self, request, *args, **kwargs):
         """项目统计信息"""
         instance = self.get_object()
-        sample_queryset = Sample.objects.filter(project=instance)
-        analysis_queryset = Analysis.objects.filter(project=instance)
+        query_params = self.request.query_params
+        work_zone_id = query_params.get('work_zone', False)
+        try:
+            work_zone = WorkZone.objects.get(pk=int(work_zone_id))
+        except:
+            work_zone = None
+        sample_queryset = Sample.objects.filter(project=instance, work_zone=work_zone)
+        analysis_queryset = Analysis.objects.filter(project=instance, work_zone=work_zone)
         month = datetime.now().strftime('%Y-%m')
         sample_total = sample_queryset.count()
         valid_count = sample_queryset.annotate(dataset_count=Count('dataset')). \

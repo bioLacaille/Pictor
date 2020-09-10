@@ -1,3 +1,8 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+站内信箱API接口
+"""
 from rest_framework import viewsets, filters, mixins
 from rest_framework.response import Response
 from rest_framework.decorators import action

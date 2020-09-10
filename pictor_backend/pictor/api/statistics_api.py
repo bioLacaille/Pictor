@@ -1,10 +1,13 @@
+"""
+Author: Alan Fu
+Email: fualan1990@gmail.com
+统计API接口
+"""
 from rest_framework import viewsets, mixins, filters, status
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from pictor.models import Project, Sample, Analysis, WorkZone
-from pictor.serializers.actionlog_serializers import ActionLogDetailSerializer, ActionLogSerializer
-from pictor.filters.action_log_filters import ActionLogParameterFilter
 
 
 class StatisticViewSet(viewsets.ViewSet):

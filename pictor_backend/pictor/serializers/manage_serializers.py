@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from pictor.models import NotificationRule, AnalysisTaskInterface, SequencingTaskInterface, AnalysisModuleTaskInterface, \
-    Announcement
+from pictor.models import NotificationRule, AnalysisTaskInterface, AnalysisModuleTaskInterface, Announcement
 from pictor.configures import NOTIFY_LEVEL, NOTIFY_INFO, NOTIFY_URGENT, NOTIFY_VERY_URGENT, NOTIFY_WARNING, NOTIFY_ERROR
 
 
@@ -75,15 +74,6 @@ class AnalysisModuleTaskInterfaceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AnalysisModuleTaskInterface
-        fields = '__all__'
-
-
-class SequencingTaskInterfaceSerializer(serializers.ModelSerializer):
-    """拆分任务接口"""
-    created_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', read_only=True, label='创建时间')
-
-    class Meta:
-        model = SequencingTaskInterface
         fields = '__all__'
 
 
