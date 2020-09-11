@@ -5,7 +5,7 @@
       @click.native="dialogTableVisible = true"
     >
       <el-button type="danger">
-        <af-icon :icon="['fas', 'bug']" />
+        <font-awesome-icon :icon="['fas', 'bug']" />
       </el-button>
     </el-badge>
 
@@ -31,7 +31,7 @@
         <el-table-column label="错误详情" width="120">
           <template slot-scope="scope">
             <el-popover placement="top-start" trigger="hover">
-              <div style="color: red;">
+              <div style="color: red">
                 {{ scope.row.err.stack }}
               </div>
               <el-button slot="reference">查看</el-button>
@@ -46,8 +46,8 @@
               :href="item.url + decodeUnicode(row.err.message)"
               target="_blank"
             >
-              <el-button style="margin-left: 5px;" type="primary">
-                <af-icon :icon="['fas', 'search']" />
+              <el-button style="margin-left: 5px" type="primary">
+                <font-awesome-icon :icon="['fas', 'search']" />
                 {{ item.title }}
               </el-button>
             </a>

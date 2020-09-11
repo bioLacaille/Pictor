@@ -38,7 +38,10 @@
     ]
   },
   "dependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^0.1.10",
     "axios": "^0.19.2",
     "better-scroll": "^1.15.2",
@@ -68,8 +71,7 @@
     "vue-simple-uploader": "^0.7.4",
     "vue-upload-component": "^2.8.20",
     "vuedraggable": "^2.24.0",
-    "vuex": "^3.5.1",
-    "zx-icon": "^1.1.8"
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "@babel/register": "^7.10.4",

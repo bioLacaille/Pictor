@@ -40,10 +40,10 @@
           v-if="passwordType === 'password'"
           class="show-pwd"
           @click="showPwd"
-          ><af-icon :icon="['fas', 'eye-slash']"
+          ><font-awesome-icon :icon="['fas', 'eye-slash']"
         /></span>
         <span v-else class="show-pwd" @click="showPwd"
-          ><af-icon :icon="['fas', 'eye']"
+          ><font-awesome-icon :icon="['fas', 'eye']"
         /></span>
       </el-form-item>
       <el-form-item label="用户昵称" prop="nickname">

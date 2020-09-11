@@ -54,9 +54,7 @@
           <el-tag v-if="scope.row.is_active" size="medium" type="success">
             可用
           </el-tag>
-          <el-tag v-else size="medium" type="info">
-            禁用
-          </el-tag>
+          <el-tag v-else size="medium" type="info"> 禁用 </el-tag>
         </template>
       </el-table-column>
       <el-table-column

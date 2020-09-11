@@ -35,7 +35,7 @@
         >
           <uploader-unsupport></uploader-unsupport>
           <div class="but-upload">
-            <uploader-drop style="padding: 10%; margin-left: 3%;">
+            <uploader-drop style="padding: 10%; margin-left: 3%">
               <p>Drop files here to upload or</p>
               <uploader-btn
                 id="global-uploader-btn"

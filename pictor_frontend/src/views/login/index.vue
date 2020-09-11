@@ -17,13 +17,11 @@
           class="login-form"
           label-position="left"
         >
-          <div class="title">
-            Hello !
-          </div>
+          <div class="title">Hello !</div>
           <div class="title-tips">欢迎来到{{ title }}！</div>
-          <el-form-item style="margin-top: 40px;" prop="username">
+          <el-form-item style="margin-top: 40px" prop="username">
             <span class="svg-container svg-container-admin">
-              <af-icon :icon="['fas', 'user']" />
+              <font-awesome-icon :icon="['fas', 'user']" />
             </span>
             <el-input
               v-model.trim="loginForm.username"
@@ -36,7 +34,7 @@
           </el-form-item>
           <el-form-item prop="password">
             <span class="svg-container svg-container-pass"
-              ><af-icon :icon="['fas', 'lock']"
+              ><font-awesome-icon :icon="['fas', 'lock']"
             /></span>
             <el-input
               :key="passwordType"
@@ -52,10 +50,10 @@
               v-if="passwordType === 'password'"
               class="show-pwd"
               @click="showPwd"
-              ><af-icon :icon="['fas', 'eye-slash']"
+              ><font-awesome-icon :icon="['fas', 'eye-slash']"
             /></span>
             <span v-else class="show-pwd" @click="showPwd"
-              ><af-icon :icon="['fas', 'eye']"
+              ><font-awesome-icon :icon="['fas', 'eye']"
             /></span>
           </el-form-item>
           <el-button

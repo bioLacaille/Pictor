@@ -5,21 +5,21 @@
         v-if="item.redirect === 'noRedirect' || index === levelList.length - 1"
         class="no-redirect"
       >
-        <af-icon
+        <font-awesome-icon
           v-if="item.meta.icon"
           :icon="['fas', item.meta.icon]"
-        ></af-icon>
+        ></font-awesome-icon>
         <vab-remix-icon
           v-if="item.meta.remixIcon"
           :icon-class="item.meta.remixIcon"
         />
         {{ item.meta.title }}
       </span>
-      <span v-else style="cursor: pointer;" @click.prevent="handleLink(item)">
-        <af-icon
+      <span v-else style="cursor: pointer" @click.prevent="handleLink(item)">
+        <font-awesome-icon
           v-if="item.meta.icon"
           :icon="['fas', item.meta.icon]"
-        ></af-icon>
+        ></font-awesome-icon>
         <vab-remix-icon
           v-if="item.meta.remixIcon"
           :icon-class="item.meta.remixIcon"

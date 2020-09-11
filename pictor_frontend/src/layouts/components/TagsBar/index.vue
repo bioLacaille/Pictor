@@ -18,29 +18,33 @@
     </el-tabs>
 
     <el-dropdown @command="handleCommand">
-      <span style="cursor: pointer;">
+      <span style="cursor: pointer">
         更多操作
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown" class="tags-more">
         <el-dropdown-item command="refreshRoute">
-          <af-icon :icon="['fas', 'circle-notch']" />
+          <font-awesome-icon :icon="['fas', 'circle-notch']" />
           刷新
         </el-dropdown-item>
         <el-dropdown-item command="closeOthersTags">
-          <af-icon :icon="['fas', 'times-circle']" />
+          <font-awesome-icon :icon="['fas', 'times-circle']" />
           关闭其他
         </el-dropdown-item>
         <el-dropdown-item command="closeLeftTags">
-          <af-icon :icon="['fas', 'arrow-alt-circle-left']"></af-icon>
+          <font-awesome-icon
+            :icon="['fas', 'arrow-alt-circle-left']"
+          ></font-awesome-icon>
           关闭左侧
         </el-dropdown-item>
         <el-dropdown-item command="closeRightTags">
-          <af-icon :icon="['fas', 'arrow-alt-circle-right']"></af-icon>
+          <font-awesome-icon
+            :icon="['fas', 'arrow-alt-circle-right']"
+          ></font-awesome-icon>
           关闭右侧
         </el-dropdown-item>
         <el-dropdown-item command="closeAllTags">
-          <af-icon :icon="['fas', 'ban']"></af-icon>
+          <font-awesome-icon :icon="['fas', 'ban']"></font-awesome-icon>
           关闭全部
         </el-dropdown-item>
       </el-dropdown-menu>

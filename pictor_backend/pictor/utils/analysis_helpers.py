@@ -8,6 +8,7 @@ from pictor.models import Analysis
 from pictor.utils.applog_helpers import api_logger
 import requests
 from pictor.utils.manage_helpers import get_task_interface
+from django.utils import timezone
 
 
 def extract_file(source_file, target_path, extract_type='rar'):
@@ -32,7 +33,7 @@ def task_avg_time(analysis_list):
         if started_time and finished_time:
             minutes = (finished_time - started_time).seconds / 60
         if started_time and not finished_time:
-            minutes = (datetime.now() - started_time).seconds / 60
+            minutes = (timezone.now() - started_time).seconds / 60
         total_minutes = total_minutes + minutes
     if total:
         avg = round(total_minutes / total, 2)

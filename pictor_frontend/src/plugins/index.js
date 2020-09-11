@@ -11,7 +11,6 @@ import "@/config/permission";
 import "@/utils/errorLog";
 import drag from "@/directive/drag";
 import permissions from "@/directive/permissions";
-import "./AFIcon";
 import VabQueryForm from "@/components/VabQueryForm";
 import VabQueryFormTopPanel from "@/components/VabQueryForm/VabQueryFormTopPanel";
 import VabQueryFormBottomPanel from "@/components/VabQueryForm/VabQueryFormBottomPanel";
@@ -24,7 +23,9 @@ import {
   FontAwesomeLayers,
   FontAwesomeLayersText,
 } from "@fortawesome/vue-fontawesome";
-
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+library.add(fas);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.component("font-awesome-layers", FontAwesomeLayers);
 Vue.component("font-awesome-layers-text", FontAwesomeLayersText);

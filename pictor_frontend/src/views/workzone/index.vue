@@ -1,8 +1,8 @@
 <template>
   <div class="card-container">
-    <div style="text-align: center;">
-      <vab-colorful-icon style="font-size: 150px;" icon-class="pictor" />
-      <h1 style="font-size: 30px;">Pictor-Biological-Analysis-Platform</h1>
+    <div style="text-align: center">
+      <vab-colorful-icon style="font-size: 150px" icon-class="pictor" />
+      <h1 style="font-size: 30px">Pictor-Biological-Analysis-Platform</h1>
     </div>
     <br />
     <el-row :gutter="20">
@@ -11,11 +11,11 @@
           >工作区----请先选择或创建你的工作区, 并将相关用户添加进该工作区,
           工作区内成员将共享该工作区数据</el-divider
         >
-        <div style="float: right; display: flex; margin-left: 10px;">
+        <div style="float: right; display: flex; margin-left: 10px">
           <el-radio-group
             v-if="is_admin"
             v-model="queryForm.show_all"
-            style="padding-left: 10px;"
+            style="padding-left: 10px"
             @change="handleChangeShow"
           >
             <el-radio-button :key="true" :label="true">全 部</el-radio-button>
@@ -25,7 +25,7 @@
           </el-radio-group>
           <el-form
             ref="form"
-            style="padding-left: 20px;"
+            style="padding-left: 20px"
             :model="queryForm"
             :inline="true"
             @submit.native.prevent
@@ -49,11 +49,11 @@
         </div>
       </el-col>
       <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="6">
-        <el-card shadow="hover" style="text-align: center; height: 380px;">
+        <el-card shadow="hover" style="text-align: center; height: 380px">
           <div
             tabindex="0"
             class="el-upload el-upload--picture-card"
-            style="margin-top: 100px;"
+            style="margin-top: 100px"
             @click="handleAdd"
           >
             <i data-v-7340870a="" class="el-icon-plus"></i
@@ -70,17 +70,17 @@
         :lg="8"
         :xl="6"
       >
-        <el-card shadow="hover" style="height: 380px;">
+        <el-card shadow="hover" style="height: 380px">
           <div
             slot="header"
-            style="text-align: center; cursor: pointer;"
+            style="text-align: center; cursor: pointer"
             @click="handleSelect(item)"
           >
-            <h1 style="font-size: 30px;">{{ item.serial_number }}</h1>
+            <h1 style="font-size: 30px">{{ item.serial_number }}</h1>
             <p>{{ item.name }}</p>
           </div>
           <div
-            style="text-align: center; cursor: pointer;"
+            style="text-align: center; cursor: pointer"
             @click="handleSelect(item)"
           >
             <font-awesome-layers full-width class="fa-4x">
@@ -92,7 +92,7 @@
               <font-awesome-layers-text
                 transform="down-0 right-1 shrink-12"
                 :value="item.name.slice(0, 1)"
-                style="color: black; font-size: 3em; text-align: center;"
+                style="color: black; font-size: 3em; text-align: center"
               />
             </font-awesome-layers>
             <br />
@@ -115,7 +115,7 @@
           </div>
           <br />
           <el-divider>{{ item.created_time }}</el-divider>
-          <div style="text-align: center;">
+          <div style="text-align: center">
             <el-button type="primary" plain @click="handleSelect(item)"
               >进入</el-button
             >

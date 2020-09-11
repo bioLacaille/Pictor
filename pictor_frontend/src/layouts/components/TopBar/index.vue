@@ -29,7 +29,7 @@
             <error-log />
             <full-screen-bar @refresh="refreshRoute"></full-screen-bar>
             <theme-bar class="hidden-md-and-down"></theme-bar>
-            <af-icon
+            <font-awesome-icon
               title="重载路由"
               :pulse="pulse"
               :icon="['fas', 'redo']"

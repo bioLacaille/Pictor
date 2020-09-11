@@ -17,14 +17,14 @@
           <error-log></error-log>
           <full-screen-bar @refresh="refreshRoute"></full-screen-bar>
           <theme-bar class="hidden-xs-only"></theme-bar>
-          <af-icon
+          <font-awesome-icon
             title="重载所有路由"
             :pulse="pulse"
             :icon="['fas', 'redo']"
             @click="refreshRoute"
-          ></af-icon>
+          ></font-awesome-icon>
           <avatar></avatar>
-          <af-icon
+          <font-awesome-icon
             title="退出系统"
             :icon="['fas', 'sign-out-alt']"
             @click="logout"

@@ -3,7 +3,7 @@
     :index="handlePath(onlyOneChildren.path)"
     @click.native="handleLink"
   >
-    <af-icon
+    <font-awesome-icon
       v-if="onlyOneChildren.meta.icon"
       :icon="['fas', onlyOneChildren.meta.icon]"
       class="vab-fas-icon"

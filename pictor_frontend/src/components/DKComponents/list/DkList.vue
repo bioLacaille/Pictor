@@ -1,7 +1,7 @@
 <template>
   <ul class="dk-list">
     <li
-      v-for="(item,index) in (isSingleData?[list]:list)"
+      v-for="(item, index) in isSingleData ? [list] : list"
       :key="index"
       class="dk-media dk-list-item"
     >

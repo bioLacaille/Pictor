@@ -1,6 +1,6 @@
 # Pictor-Biological-Analysis-Platform
 
-Pictor-Biological-Analysis-Platform（无码生信分析平台），生物大数据分析于一体平台,集成多个软件工具、标准化分析流程，并可自主定制分析流程，同时采用可视化、便捷化操作，大幅度提升数据分析效率。
+Pictor-Biological-Analysis-Platform（无码生信分析平台）
 
 # Todo
 
@@ -64,7 +64,7 @@ next next next next next next
 
 部署前提：
  
-1. 创建MySQL数据库 'pictor'
+1. 安装MySQL , 创建MySQL数据库 'pictor'
 
 ```shell script
 create database pictor character set utf8;
@@ -79,16 +79,32 @@ create database pictor character set utf8;
 git clone git@github.com:bioLacaille/Pictor.git  # clone
 
 cd Pictor
-
+# 部署并运行后端
 python3 -m venv pictor_env
 source pictor_env/bin/activate
 cd pictor_backend
 pip install -r requirements.txt
 python manage.py makemigrations pictor
+python manage.py migrate
+python manage.py create_default_user  # 创建默认用户
+python manage.py runserver 0.0.0.0:8000
+# 部署并运行前端
+cd pictor_frontend
+npm install
+npm run serve
+```
+
+3.访问: http://127.0.0.1:8080
+
+## pull docker
+
+亦可直接使用docker demo
+
+```shell script
 
 ```
 
-
+ps: docker 版本为当前稳定版, 如需使用最新版, 请自行拉取代码进行部署
 
 # 项目展示
 

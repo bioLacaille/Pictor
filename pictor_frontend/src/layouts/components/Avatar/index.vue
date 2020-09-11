@@ -9,15 +9,15 @@
 
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item command="workZone">
-        <af-icon :icon="['fas', 'network-wired']"></af-icon>
+        <font-awesome-icon :icon="['fas', 'network-wired']"></font-awesome-icon>
         工作区
       </el-dropdown-item>
       <el-dropdown-item command="personalCenter">
-        <af-icon :icon="['fas', 'user']"></af-icon>
+        <font-awesome-icon :icon="['fas', 'user']"></font-awesome-icon>
         个人中心
       </el-dropdown-item>
       <el-dropdown-item command="logout" divided>
-        <af-icon :icon="['fas', 'sign-out-alt']"></af-icon>
+        <font-awesome-icon :icon="['fas', 'sign-out-alt']"></font-awesome-icon>
         退出登录
       </el-dropdown-item>
     </el-dropdown-menu>

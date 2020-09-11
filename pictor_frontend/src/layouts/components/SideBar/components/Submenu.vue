@@ -5,7 +5,7 @@
     :popper-append-to-body="false"
   >
     <template slot="title">
-      <af-icon
+      <font-awesome-icon
         v-if="item.meta && item.meta.icon"
         :icon="['fas', item.meta.icon]"
         class="vab-fas-icon"

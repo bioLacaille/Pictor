@@ -41,12 +41,12 @@
         >
           <div class="elp-card-grid-item">
             <div>
-              <img src="../../assets/project.png" />
+              <img src="@/assets/project.png" />
               <el-button type="text" size="medium" @click="handleMange(project)"
                 >{{ project.serial_number }}({{ project.name }})</el-button
               >
             </div>
-            <div style="word-break: break-all;">{{ project.remark }}</div>
+            <div style="word-break: break-all">{{ project.remark }}</div>
             <div>
               <span>{{ project.creator.nickname }}</span>
               <span>{{ project.created_time }}</span>
@@ -68,7 +68,7 @@
         >
           <div class="elp-card-grid-item">
             <div>
-              <img src="../../assets/analysis.jpeg" />
+              <img src="@/assets/analysis.jpeg" />
               <el-button
                 type="text"
                 size="medium"

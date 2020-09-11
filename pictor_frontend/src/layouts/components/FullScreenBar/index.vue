@@ -1,12 +1,12 @@
 <template>
   <span :title="isFullscreen ? '退出全屏' : '进入全屏'">
-    <af-icon
+    <font-awesome-icon
       :icon="[
         'fas',
         isFullscreen ? 'compress-arrows-alt' : 'expand-arrows-alt',
       ]"
       @click="click"
-    ></af-icon>
+    ></font-awesome-icon>
   </span>
 </template>
 

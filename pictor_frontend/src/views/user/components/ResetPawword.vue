@@ -19,10 +19,10 @@
           v-if="passwordType === 'password'"
           class="show-pwd"
           @click="showPwd"
-          ><af-icon :icon="['fas', 'eye-slash']"
+          ><font-awesome-icon :icon="['fas', 'eye-slash']"
         /></span>
         <span v-else class="show-pwd" @click="showPwd"
-          ><af-icon :icon="['fas', 'eye']"
+          ><font-awesome-icon :icon="['fas', 'eye']"
         /></span>
       </el-form-item>
       <el-form-item label="确认密码" prop="confirm_password">
@@ -38,10 +38,10 @@
           v-if="confirmPasswordType === 'password'"
           class="show-pwd"
           @click="showConfirmPwd"
-          ><af-icon :icon="['fas', 'eye-slash']"
+          ><font-awesome-icon :icon="['fas', 'eye-slash']"
         /></span>
         <span v-else class="show-pwd" @click="showConfirmPwd"
-          ><af-icon :icon="['fas', 'eye']"
+          ><font-awesome-icon :icon="['fas', 'eye']"
         /></span>
       </el-form-item>
     </el-form>

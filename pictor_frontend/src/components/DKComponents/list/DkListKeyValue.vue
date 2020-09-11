@@ -8,7 +8,7 @@
   >
     <slot name="prepend"></slot>
     <el-col
-      v-for="(item,index) in (isSingleData?[list]:list)"
+      v-for="(item, index) in isSingleData ? [list] : list"
       :key="index"
       :xs="xs"
       :sm="sm"

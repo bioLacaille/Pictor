@@ -144,6 +144,21 @@ module.exports = {
         .loader("image-webpack-loader")
         .options({
           bypassOnDebug: true,
+          mozjpeg: {
+            enabled: false,
+          },
+          gifsicle: {
+            interlaced: false,
+          },
+          optipng: {
+            enabled: false,
+            optimizationLevel: 7,
+          },
+          pngquant: {
+            enabled: false,
+            quality: "65-90",
+            speed: 4,
+          },
         })
         .end();
     });

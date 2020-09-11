@@ -1,17 +1,17 @@
 <template>
   <span v-if="themeBar">
-    <af-icon
+    <font-awesome-icon
       title="主题配置"
       :icon="['fas', 'palette']"
       @click="handleChangeTheme"
     />
     <div class="theme-bar-setting">
       <div @click="handleChangeTheme">
-        <af-icon :icon="['fas', 'palette']" />
+        <font-awesome-icon :icon="['fas', 'palette']" />
         <p>主题配置</p>
       </div>
       <div @click="handleGetCode">
-        <af-icon :icon="['fas', 'laptop-code']"></af-icon>
+        <font-awesome-icon :icon="['fas', 'laptop-code']"></font-awesome-icon>
         <p>代码仓库</p>
       </div>
       <div @click="handleChangeQq">
@@ -27,7 +27,7 @@
       append-to-body
       size="300px"
     >
-      <el-scrollbar style="height: 94vh; overflow: hidden;">
+      <el-scrollbar style="height: 94vh; overflow: hidden">
         <div class="el-drawer__body">
           <el-form ref="form" :model="theme">
             <el-form-item label="布局">

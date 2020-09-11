@@ -13,8 +13,9 @@ class Command(BaseCommand):
     def create_system_user(self, username, email, nickname, password, role_level, **kwargs):
         system_user = User.objects.filter(username=username).first()
         if system_user:
-            self.stdout.write(self.style.SUCCESS(f'用户:{username}已经存在'))
+            self.stdout.write(self.style.SUCCESS(f'user :{username} exist'))
         else:
+            self.stdout.write(self.style.SUCCESS(f'create user:{username}'))
             system_user = User.objects.create_superuser(username=username, email=email, nickname=nickname,
                                                         password=password, role_level=role_level, **kwargs)
         return system_user
