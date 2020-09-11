@@ -84,6 +84,7 @@ python3 -m venv pictor_env
 source pictor_env/bin/activate
 cd pictor_backend
 pip install -r requirements.txt
+python manage.py makemigrations pictor
 
 ```
 
