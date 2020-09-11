@@ -1,0 +1,10 @@
+db.json
+.deploy_git/
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+public/
+.deploy*/
+yarn.lock
+package-lock.json
