@@ -20,7 +20,8 @@ module.exports = {
       ? "http://192.168.1.105:8888"
       : "http://192.168.1.105:8888",
   //标题 （包括初次加载雪花屏的标题 页面的标题 浏览器的标题）
-  title: "Pictor-Biological-Analysis-Platform",
+  // title: "Pictor-Biological-Analysis-Platform",
+  title: "Pictor",
   //简写
   abbreviation: "Pictor",
   //开发环境端口号

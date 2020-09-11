@@ -138,8 +138,8 @@ export default {
   },
   mounted() {
     //项目上线时记得去掉
-    this.loginForm.username = "alan";
-    this.loginForm.password = "fu030632";
+    this.loginForm.username = "admin";
+    this.loginForm.password = "pictor123456";
   },
   methods: {
     showPwd() {

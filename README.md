@@ -60,6 +60,19 @@ next next next next next next
 
 # 部署使用说明
 
+## 自行部署
+
+
+```shell script
+git clone git@github.com:bioLacaille/Pictor.git  # clone
+
+cd Pictor
+
+python3 -m venv pictor_env
+```
+
+
+
 # 项目展示
 
 # 版权声明

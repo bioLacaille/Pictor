@@ -82,7 +82,7 @@ export default {
         error_code: "400",
         start_uri: "start",
         stop_uri: "stop",
-        continue_uri: "continue",
+        continue_uri: "continue_run",
         reset_uri: "reset",
         status_uri: "status",
         result_uri: "results",

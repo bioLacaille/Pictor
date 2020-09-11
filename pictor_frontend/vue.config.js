@@ -21,7 +21,7 @@ const time = new dayjs().format("YYYY-M-D HH:mm:ss");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 const productionGzipExtensions = ["html", "js", "css", "svg"];
 process.env.VUE_APP_TITLE = title || "Pictor-Biological-Analysis-Platform";
-process.env.VUE_APP_AUTHOR = author || "chuzhixin";
+process.env.VUE_APP_AUTHOR = author || "Alan";
 process.env.VUE_APP_UPDATE_TIME = time;
 process.env.VUE_APP_VERSION = version;
 function resolve(dir) {
