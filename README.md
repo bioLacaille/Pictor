@@ -69,6 +69,7 @@ git clone git@github.com:bioLacaille/Pictor.git  # clone
 cd Pictor
 
 python3 -m venv pictor_env
+source pictor_env/bin/activate
 ```
 
 
