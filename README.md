@@ -62,6 +62,18 @@ next next next next next next
 
 ## 自行部署
 
+部署前提：
+ 
+1. 创建MySQL数据库 'pictor'
+
+```shell script
+create database pictor character set utf8;
+```
+
+2. 安装Redis, nodejs(npm)
+
+
+3.部署
 
 ```shell script
 git clone git@github.com:bioLacaille/Pictor.git  # clone
@@ -70,6 +82,9 @@ cd Pictor
 
 python3 -m venv pictor_env
 source pictor_env/bin/activate
+cd pictor_backend
+pip install -r requirements.txt
+
 ```
 
 
