@@ -52,7 +52,12 @@ Pictor-Biological-Analysis-Platform（无码生信分析平台）
 
 ## 二. 项目架构
 
+![技术架构](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1+.jpg)
+
+
 ## 三. 功能说明
+
+![功能概述](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/Pictor%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0.jpg)
 
 ## 四. 使用说明
 
