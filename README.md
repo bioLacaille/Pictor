@@ -54,27 +54,42 @@ Pictor-Biological-Analysis-Platform（无码生信分析平台）
 
 ## 三. 功能说明
 
+## 四. 使用说明
+
 # 部署使用说明
 
-## 自行部署
+## 一. 自行部署
 
 部署前提：
  
-1. 安装MySQL , 创建MySQL数据库 'pictor'
+1.安装MySQL , 创建MySQL数据库 'pictor'
 
 ```shell script
 create database pictor character set utf8;
 ```
 
-2. 安装Redis, nodejs(npm)
+2.安装Redis, nodejs(npm)
 
 
 3.部署
 
 ```shell script
 git clone git@github.com:bioLacaille/Pictor.git  # clone
+```
 
-cd Pictor
+配置 pictor_backend/configure.ini 里的 MYSQL 
+
+```shell script
+[MYSQL]
+MYSQL_DB = pictor
+MYSQL_USER = pictor
+MYSQL_PASSWORD = pictor123456
+MYSQL_HOST = 127.0.0.1
+MYSQL_PORT = 3306
+
+```
+
+```shell script
 # 部署并运行后端
 python3 -m venv pictor_env
 source pictor_env/bin/activate
@@ -84,6 +99,9 @@ python manage.py makemigrations pictor
 python manage.py migrate
 python manage.py create_default_user  # 创建默认用户
 python manage.py runserver 0.0.0.0:8000
+```
+
+```shell script
 # 部署并运行前端
 cd pictor_frontend
 npm install
@@ -92,7 +110,7 @@ npm run serve
 
 3.访问: http://127.0.0.1:8080
 
-## 自行封装docker
+## 二. 自行封装docker
 
 ```shell script
 docker build -t pictor .
@@ -104,7 +122,7 @@ docker run -d -p 80:80  pictor sh -c 'sh init.sh'
 
 等待初始化完毕(大概需要10s), 访问: http://127.0.0.1/
 
-指定文件数据存放目录, 将目录挂载至 即可 
+指定文件数据存放目录, 将目录挂载至 /deploy_web/PictorData 即可 
 
 ```shell script
 docker run -d -p 80:80 -v {FILEDATA}:/deploy_web/PictorData pictor sh -c 'sh init.sh'
@@ -117,7 +135,7 @@ docker run -d -p 80:80 -v {MYSQLDATA}:/var/lib/mysql pictor sh -c 'sh init.sh'
 ```
 
 
-## 使用 docker demo 
+## 三. 使用 docker demo 
 
 亦可直接使用docker demo
 
@@ -132,7 +150,7 @@ docker run -d -p 80:80  fualan/pictor_demo sh -c 'sh init.sh'
 等待初始化完毕(大概需要10s), 访问: http://127.0.0.1/
 
 
-指定文件数据存放目录, 将目录挂载至 即可 
+指定文件数据存放目录, 将目录挂载至 /deploy_web/PictorData 即可 
 
 ```shell script
 docker run -d -p 80:80 -v {FILEDATA}:/deploy_web/PictorData fualan/pictor_demo sh -c 'sh init.sh'
