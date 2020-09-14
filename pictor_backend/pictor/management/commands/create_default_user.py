@@ -16,8 +16,12 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f'user :{username} exist'))
         else:
             self.stdout.write(self.style.SUCCESS(f'create user:{username}'))
-            system_user = User.objects.create_superuser(username=username, email=email, nickname=nickname,
-                                                        password=password, role_level=role_level, **kwargs)
+            if role_level == 40:
+                system_user = User.objects.create_superuser(username=username, email=email, nickname=nickname,
+                                                            password=password, role_level=role_level, **kwargs)
+            else:
+                system_user = User.objects.create_user(username=username, email=email, nickname=nickname,
+                                                       password=password, role_level=role_level, **kwargs)
         return system_user
 
     def handle(self, *args, **options):

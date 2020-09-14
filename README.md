@@ -20,15 +20,11 @@ Pictor-Biological-Analysis-Platform（无码生信分析平台）
    
 4.编写分析任务管理接口, 对接平台
 
-5.封装第一版本为Docker , 并发布 v1 Demo 
-
-### 下一阶段
-
-next next next next next next 
+5.封装第一版本Docker , 并发布 v1 Demo 
 
 # 系统描述
 
-致力于打造一个完整的无码生信分析平台，采用现阶段流行技术实现。
+致力于打造一个完整的无码生信分析平台，采用 Python+Django+Vue+Element 实现
 
 ## 一. 用户角色描述
 
@@ -96,12 +92,56 @@ npm run serve
 
 3.访问: http://127.0.0.1:8080
 
-## pull docker
+## 自行封装docker
+
+```shell script
+docker build -t pictor .
+```
+
+```shell script
+docker run -d -p 80:80  pictor sh -c 'sh init.sh'
+```
+
+等待初始化完毕(大概需要10s), 访问: http://127.0.0.1/
+
+指定文件数据存放目录, 将目录挂载至 即可 
+
+```shell script
+docker run -d -p 80:80 -v {FILEDATA}:/deploy_web/PictorData pictor sh -c 'sh init.sh'
+```
+
+使用宿主MySQL数据库
+
+```shell script
+docker run -d -p 80:80 -v {MYSQLDATA}:/var/lib/mysql pictor sh -c 'sh init.sh'
+```
+
+
+## 使用 docker demo 
 
 亦可直接使用docker demo
 
 ```shell script
+docker pull fualan/pictor_demo:0.1
+```
 
+```shell script
+docker run -d -p 80:80  fualan/pictor_demo sh -c 'sh init.sh'
+```
+
+等待初始化完毕(大概需要10s), 访问: http://127.0.0.1/
+
+
+指定文件数据存放目录, 将目录挂载至 即可 
+
+```shell script
+docker run -d -p 80:80 -v {FILEDATA}:/deploy_web/PictorData fualan/pictor_demo sh -c 'sh init.sh'
+```
+
+使用宿主MySQL数据库
+
+```shell script
+docker run -d -p 80:80 -v {MYSQLDATA}:/var/lib/mysql fualan/pictor_demo sh -c 'sh init.sh'
 ```
 
 ps: docker 版本为当前稳定版, 如需使用最新版, 请自行拉取代码进行部署
@@ -116,6 +156,6 @@ ps: docker 版本为当前稳定版, 如需使用最新版, 请自行拉取代�
 
 # 许可证
 
-[MIT](https://github.com/PanJiaChen/vue-element-admin/blob/master/LICENSE)
+[MIT]
 
 Copyright (c) 2020-present BioLacaille Team 
