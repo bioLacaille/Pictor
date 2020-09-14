@@ -145,7 +145,7 @@ docker run -d -p 80:80 -v {MYSQLDATA}:/var/lib/mysql pictor sh -c 'sh init.sh'
 亦可直接使用docker demo
 
 ```shell script
-docker pull fualan/pictor_demo:0.1
+docker pull fualan/pictor_demo:latest
 ```
 
 ```shell script
@@ -170,6 +170,22 @@ docker run -d -p 80:80 -v {MYSQLDATA}:/var/lib/mysql fualan/pictor_demo sh -c 's
 ps: docker 版本为当前稳定版, 如需使用最新版, 请自行拉取代码进行部署
 
 # 项目展示
+
+## 首页
+
+![首页](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/%E9%A6%96%E9%A1%B5.png)
+
+## 数据管理
+
+![数据管理](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE.png)
+
+## 分析任务
+
+![](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/%E5%88%86%E6%9E%90%E4%BB%BB%E5%8A%A1.png)
+
+## 任务详情
+
+![](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/%E4%BB%BB%E5%8A%A1%E8%AF%A6%E6%83%85.png)
 
 # 版权声明
 
