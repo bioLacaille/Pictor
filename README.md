@@ -52,12 +52,12 @@ Pictor-Biological-Analysis-Platform（无码生信分析平台）
 
 ## 二. 项目架构
 
-![技术架构](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1+.jpg)
+![技术架构](https://raw.githubusercontent.com/bioLacaille/Pictor/master/docs/images/%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%20.jpg)
 
 
 ## 三. 功能说明
 
-![功能概述](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/Pictor%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0.jpg)
+![功能概述](https://raw.githubusercontent.com/bioLacaille/Pictor/master/docs/images/Pictor%E5%8A%9F%E8%83%BD%E6%A6%82%E8%BF%B0.jpg)
 
 ## 四. 使用说明
 
@@ -173,19 +173,19 @@ ps: docker 版本为当前稳定版, 如需使用最新版, 请自行拉取代�
 
 ## 首页
 
-![首页](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/%E9%A6%96%E9%A1%B5.png)
+![首页](https://raw.githubusercontent.com/bioLacaille/Pictor/master/docs/images/%E9%A6%96%E9%A1%B5.png)
 
 ## 数据管理
 
-![数据管理](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE.png)
+![数据管理](https://raw.githubusercontent.com/bioLacaille/Pictor/master/docs/images/%E6%96%87%E4%BB%B6%E6%95%B0%E6%8D%AE.png)
 
 ## 分析任务
 
-![](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/%E5%88%86%E6%9E%90%E4%BB%BB%E5%8A%A1.png)
+![](https://raw.githubusercontent.com/bioLacaille/Pictor/master/docs/images/%E5%88%86%E6%9E%90%E4%BB%BB%E5%8A%A1.png)
 
 ## 任务详情
 
-![](https://sagene-i-cloud-dev.s3.cn-north-1.amazonaws.com.cn/data/public/%E4%BB%BB%E5%8A%A1%E8%AF%A6%E6%83%85.png)
+![](https://raw.githubusercontent.com/bioLacaille/Pictor/master/docs/images/%E4%BB%BB%E5%8A%A1%E8%AF%A6%E6%83%85.png)
 
 # 版权声明
 
